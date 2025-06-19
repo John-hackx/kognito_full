@@ -1,0 +1,390 @@
+.quizzesMain {
+  /* border: 1px solid red; */
+  height: 170vh;
+  background-color: #f9f9f9;
+  padding-top: 40px;
+  padding-left: 50px;
+  padding-right: 50px;
+  /* position: absolute; */
+  margin-top: 60px;
+}
+.subMain {
+  /* border: 1px solid blue; */
+  height: 100%;
+  display: flex;
+  gap: 30px;
+}
+
+.subMainLeft {
+  border-radius: 13px;
+  flex: 0.24;
+  background-color: #ffffff;
+  padding: 20px;
+  position: relative;
+}
+.subMainLeft h3 {
+  font-weight: 600;
+  font-size: 18px;
+}
+.searchTitle {
+  font-size: 15px;
+  color: #374151;
+  margin-top: 20px;
+}
+.subMainLeft svg {
+  position: absolute;
+  color: #686b72;
+  z-index: 1;
+  margin-top: 16px;
+  margin-left: 10px;
+}
+.subMainLeft input {
+  height: 34px;
+  outline: none;
+  border: 0.8px solid #e3e3e3;
+  border-radius: 13px;
+  width: 87%;
+  padding-left: 40px;
+  margin-top: 10px;
+}
+
+.filterTypeBox {
+  margin-top: 20px;
+}
+.filterList {
+  margin-top: 10px;
+}
+.filterList label {
+  display: flex;
+  /* border: 1px solid red; */
+  width: 60%;
+  font-size: 15px;
+  align-items: center;
+}
+.filterList label:hover {
+  cursor: pointer;
+}
+.filterList input {
+  width: 18px;
+  height: 18px;
+}
+.filterItemText {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.subMainRight {
+  border: 0.8px solid #e7e7e7;
+  border-radius: 13px;
+  background-color: #ffffff;
+  flex: 0.76;
+  padding: 20px;
+}
+.subMainRight h4 {
+  font-size: 22px;
+}
+.selectedFiltersContainer {
+  /* border: 1px solid red; */
+  height: 30px;
+  margin-top: 30px;
+  display: flex;
+  gap: 10px;
+}
+.selectedFilter {
+  display: flex;
+  align-items: center;
+}
+.selectedFilter svg {
+  width: 16px;
+  height: 16px;
+  margin-top: 5px;
+}
+.availableQuizContainer {
+  /* border: 1px solid red; */
+  height: 80%;
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  column-gap: 20px;
+  row-gap: 30px;
+}
+
+/* mobile screen responsive styling */
+@media (min-width: 360px) and (max-width: 500px) {
+  .topBar {
+    /* border: 1px solid red; */
+    width: 98vw;
+    height: 11vh;
+    display: flex;
+    background-color: #ffffff;
+    flex-direction: column;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    z-index: 1;
+  }
+  .topBarSearch {
+    flex: 0.5;
+    padding-left: 10px;
+    padding-right: 10px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    /* border: 1px solid green; */
+  }
+  .topBarSearch svg {
+    position: absolute;
+    top: 13px;
+    color: rgba(0, 0, 0, 0.5);
+    left: 25px;
+  }
+  .topBarSearch input {
+    background-color: #f3f4f6;
+    height: 38px;
+    border-radius: 10px;
+    font-size: 15px;
+    padding-left: 40px;
+    outline: none;
+    width: 91%;
+  }
+  .topBarSearch input:focus {
+    border: 0.8px solid rgb(8, 171, 247);
+  }
+  .topBarFilter {
+    flex: 0.5;
+    /* border: 1px solid blue; */
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .filterContainer {
+    display: flex;
+    overflow-x: scroll;
+    gap: 10px;
+    height: 100%;
+    align-items: center;
+  }
+  .filterItem {
+    padding: 5px;
+    background-color: #f3f4f6;
+    border-radius: 8px;
+    margin-top: 5px;
+  }
+
+  .quizzesMain {
+    position: absolute;
+    top: 6vh;
+    width: 71.5vw;
+    height: 340vh;
+  }
+  .subMain {
+    gap: 0;
+    width: 100%;
+    left: 0;
+    position: absolute;
+  }
+  .subMainLeft {
+    display: none;
+  }
+  .subMainRight {
+    border: 0px;
+    flex: 1;
+    background: none;
+    /* border: 1px solid red; */
+    height: 95%;
+  }
+  .subMainRight h4 {
+    font-size: 20px;
+  }
+  .selectedFiltersContainer {
+    display: none;
+  }
+  .availableQuizContainer {
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid blue; */
+    gap: 20px;
+    height: 95%;
+  }
+  .availableCard {
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    border: 0.8px solid #d9d9d9;
+    border-radius: 13px;
+  }
+  .availableCardTop {
+    flex: 0.5;
+  }
+  .availableCardTop img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-top-right-radius: 13px;
+    border-top-left-radius: 13px;
+  }
+  .availableCardBottom {
+    flex: 0.5;
+    display: flex;
+    flex-direction: column;
+  }
+  .cardHeader {
+    /* border: 1px solid red; */
+    flex: 0.3;
+    display: flex;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .cardHeaderLeft {
+    flex: 0.6;
+    /* border-right: 1px solid #374151; */
+    display: flex;
+    align-items: center;
+  }
+  .cardHeaderLeft h4 {
+    font-size: 17px;
+    font-weight: 600;
+  }
+  .cardHeaderRight {
+    /* border-right: 1px solid #374151; */
+    flex: 0.4;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .cardHeaderRight p {
+    font-size: 14px;
+    background-color: #f3f4f6;
+    padding: 5px;
+    border-radius: 8px;
+    color: #374151;
+    font-weight: 500;
+  }
+  .cardTime {
+    flex: 0.2;
+    /* border: 1px solid green; */
+    display: flex;
+    padding-left: 10px;
+    padding-right: 10px;
+    align-items: center;
+  }
+  .quizTime {
+    font-size: 15px;
+    color: #374151;
+    margin-left: 5px;
+  }
+  .cardTime span {
+    width: 8px;
+    height: 8px;
+    background-color: #374151;
+    border-radius: 50%;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .quizQuestions {
+    font-size: 15px;
+    color: #374151;
+  }
+  .cardRating {
+    flex: 0.2;
+    /* border: 1px solid blue; */
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .quizRating {
+    font-size: 15px;
+    color: #374151;
+    margin-left: 5px;
+  }
+  .quizAttempts {
+    font-size: 15px;
+    color: #374151;
+    position: absolute;
+    right: 38px;
+  }
+  .cardButton {
+    padding-left: 10px;
+    padding-right: 10px;
+    flex: 0.3;
+    display: flex;
+    align-items: center;
+    padding-bottom: 5px;
+    /* border: 1px solid yellow; */
+  }
+  .cardButton button {
+    width: 100%;
+    height: 40px;
+    background-color: #2a7894;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: 500;
+  }
+
+  /* Scroll bar design */
+  .filterContainer {
+    /* width: 100%; */
+    max-height: 300px; /* adjust as needed */
+    overflow: auto;
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: transparent transparent; /* Firefox */
+    transition: scrollbar-color 0.3s ease;
+  }
+
+  /* Show scrollbar only on hover or scroll */
+  .filterContainer:hover {
+    scrollbar-color: #888 #f1f1f1;
+  }
+
+  /* Chrome, Edge, Safari (WebKit browsers) */
+  .filterContainer::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .filterContainer::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .filterContainer::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+  }
+
+  .filterContainer:hover::-webkit-scrollbar-thumb {
+    background-color: #888;
+  }
+
+  /* Hide scrollbar buttons (arrows) */
+  .filterContainer::-webkit-scrollbar-button {
+    display: none;
+    height: 0;
+    width: 0;
+  }
+}
+
+@media (max-width: 360px) {
+  .quizzesMain {
+    height: 335vh;
+  }
+  .availableQuizContainer {
+    height: 100%;
+  }
+}
+
+@media (max-width: 393px) and (min-width: 385px) {
+  .availableCard {
+    height: 55vh;
+  }
+  .availableQuizContainer {
+    height: 100%;
+  }
+  .quizzesMain {
+    height: 400vh;
+  }
+}

@@ -1,0 +1,281 @@
+.finishQuizContainer {
+  height: 89vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* border: 1px solid red; */
+  /* background-image: url("../../assets/images/bg 1.jpg"); */
+  background-color: #eef4ff;
+  margin-top: 11vh;
+}
+.layer {
+  /* position: absolute; */
+  background-color: rgba(0, 0, 0, 0);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.subContainer {
+  width: 50%;
+  height: 90%;
+  background-color: rgba(255, 255, 255);
+  border-radius: 13px;
+}
+
+.trophyContainer {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  background-color: #d8d7d7;
+  border-radius: 50%;
+}
+
+.completedTitle {
+  font-size: 28px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.completedDescription {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.6);
+  margin-top: 10px;
+  text-align: center;
+}
+.score {
+  width: 286px;
+  height: 61px;
+  border-radius: 36px;
+  border: 0.5px solid #d8d7d7;
+  background-color: #f6f6fe;
+  text-align: center;
+  justify-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  font-size: 25px;
+  color: #001892;
+  font-weight: 700;
+  /* padding-top: 20px; */
+}
+
+.finishCardsContainer {
+  height: 104px;
+  width: 80%;
+  /* border: 1px solid red; */
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  gap: 18px;
+}
+
+.finishQuizCard {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.finishQuizCardSvgContainer {
+  margin-top: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.finishCardText {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.67);
+  margin-top: 5px;
+}
+.finishCardValue {
+  font-size: 20px;
+  margin-top: 5px;
+}
+
+.finishCardButtons {
+  display: flex;
+  gap: 10px;
+  width: 80%;
+  margin: 0 auto;
+  height: 40px;
+  /* border: 1px solid red; */
+  margin-top: 20px;
+}
+.viewSolutionsBtn {
+  background-color: #4f46e5;
+  width: 185px;
+  border-radius: 7px;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 16px;
+  position: relative;
+  padding-left: 10px;
+}
+.viewSolutionsBtn:hover {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0px 0px 5px rgba(2, 105, 156, 0.8);
+  transform: scale(1.01);
+  background: transparent;
+  color: rgba(2, 89, 133);
+}
+.viewSolutionsBtn span {
+  position: absolute;
+  left: 10px;
+}
+.tryAgainBtn {
+  position: relative;
+  border-radius: 7px;
+  padding-left: 5px;
+  border: 0.8px solid #d9d9d9;
+  font-size: 17px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.67);
+  width: 180px;
+}
+.tryAgainBtn:hover {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0px 0px 5px rgba(3, 125, 185, 0.8);
+  transform: scale(1.01);
+  color: rgba(2, 89, 133);
+}
+.tryAgainBtn span {
+  position: absolute;
+  left: 10px;
+}
+.backToHomeBtn {
+  position: relative;
+  border-radius: 7px;
+  padding-left: 16px;
+  border: 0.8px solid #d9d9d9;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.67);
+  width: 190px;
+}
+.backToHomeBtn:hover {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0px 0px 5px rgba(3, 125, 185, 0.8);
+  transform: scale(1.01);
+  color: rgba(2, 89, 133);
+}
+
+.backToHomeBtn span {
+  position: absolute;
+  left: 10px;
+}
+
+@media (max-width: 359px) {
+  /* Styles for small phones */
+  .finishQuizContainer {
+    height: 100vh;
+  }
+  .subContainer {
+    width: 90%;
+    height: 90%;
+    margin-top: 0;
+    margin-top: -3vh;
+  }
+  .finishCardButtons {
+    width: 90%;
+    margin-top: 20vh;
+  }
+  .viewSolutionsBtn {
+    padding: 0;
+  }
+  .tryAgainBtn {
+    padding: 0;
+  }
+  .backToHomeBtn {
+    padding: 0;
+  }
+}
+
+@media (min-width: 360px) and (max-width: 399px) {
+  /* Styles for standard phones */
+
+  .finishQuizContainer {
+    height: 100vh;
+  }
+  .subContainer {
+    width: 90%;
+    height: 90%;
+    margin-top: 0;
+    margin-top: -3vh;
+  }
+  .finishCardButtons {
+    width: 90%;
+    margin-top: 20vh;
+  }
+  .viewSolutionsBtn {
+    padding: 0;
+  }
+  .tryAgainBtn {
+    padding: 0;
+  }
+  .backToHomeBtn {
+    padding: 0;
+  }
+}
+
+@media (min-width: 400px) and (max-width: 430px) {
+  /* Styles for large phones and compact phablets */
+  .finishQuizContainer {
+    height: 100vh;
+  }
+  .subContainer {
+    width: 90%;
+    height: 90%;
+    margin-top: 0;
+    margin-top: -3vh;
+  }
+  .finishCardButtons {
+    width: 90%;
+    margin-top: 20vh;
+  }
+  .viewSolutionsBtn {
+    padding: 0;
+  }
+  .tryAgainBtn {
+    padding: 0;
+  }
+  .backToHomeBtn {
+    padding: 0;
+  }
+}
+
+@media (min-width: 431px) and (max-width: 600px) {
+  /* Styles for phablets and small tablets */
+  .finishQuizContainer {
+    height: 100vh;
+  }
+  .subContainer {
+    width: 90%;
+    height: 90%;
+    margin-top: 0;
+    margin-top: -3vh;
+  }
+  .finishCardButtons {
+    width: 90%;
+    margin-top: 20vh;
+  }
+  .viewSolutionsBtn {
+    padding: 0;
+  }
+  .tryAgainBtn {
+    padding: 0;
+  }
+  .backToHomeBtn {
+    padding: 0;
+  }
+}

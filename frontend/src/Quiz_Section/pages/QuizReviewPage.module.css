@@ -1,0 +1,847 @@
+.header {
+  height: 12vh;
+  border-bottom: 0.8px solid #d9d9d9;
+  display: flex;
+  background-color: #ffffff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+.headerLeft {
+  flex: 0.5;
+  /* border: 1px solid red; */
+  display: flex;
+  align-items: center;
+  padding-left: 60px;
+}
+.headerLeft svg:hover {
+  cursor: pointer;
+  color: #0d4b7e;
+  transition: 0.3s all ease-in-out;
+}
+.headerTitle {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+}
+.headerTitle h2 {
+  color: #0d4b7e;
+  font-size: 24px;
+}
+.headerTitle p {
+  color: #374151;
+  font-size: 15px;
+}
+
+.headerRight {
+  /* border: 1px solid green; */
+  flex: 0.5;
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 60px;
+  gap: 20px;
+}
+.completed {
+  background-color: #dcfce7;
+  height: 32px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.completed p {
+  color: #287344;
+  font-size: 15px;
+  text-align: center;
+}
+
+.checkSvgContainer {
+  background-color: #22c55e;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+}
+.bookLive {
+  background-color: #0d4b7e;
+  height: 40px;
+  width: 236px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bookLive:hover {
+  cursor: pointer;
+}
+.bookLive p {
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 17px;
+  margin-left: 5px;
+}
+.bookLive svg {
+  color: #ffffff;
+}
+
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  height: 270vh;
+  /* border: 1px solid red; */
+}
+.main {
+  flex: 1;
+  background-color: #f9fafb;
+  /* height: 75vh; */
+  display: flex;
+  /* border: 1px solid black; */
+  flex-direction: column;
+  margin-top: 10vh;
+}
+.mainHeader {
+  flex: 0.06;
+  /* border: 1px solid green; */
+  display: flex;
+}
+
+.mainHeaderLeft {
+  flex: 0.5;
+  /* border: 1px solid yellow; */
+  padding-left: 100px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.quizStats {
+  display: flex;
+  font-size: 16px;
+  /* margin-top: 15px; */
+}
+.quizStatsTitle {
+  color: #374151;
+}
+.quizStatsDescription {
+  color: rgba(0, 0, 0, 0.8);
+  margin-left: 5px;
+}
+
+.mainHeaderRight {
+  flex: 0.5;
+  /* border: 1px solid black; */
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  padding-right: 100px;
+  align-items: center;
+}
+
+.correctIncorrect {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* margin-top: -20px; */
+}
+.correctIncorrect span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.correctIncorrect p {
+  font-size: 16px;
+  color: #374151;
+  margin-left: 5px;
+}
+.mainBody {
+  flex: 0.92;
+  /* border: 1px solid blue; */
+}
+
+.mainBodySub {
+  width: 60%;
+  height: 100%;
+  max-height: 100%;
+  position: relative;
+  background-color: #ffffff;
+  /* overflow-y: scroll; */
+  border-top-right-radius: 13px;
+  border-top-left-radius: 13px;
+  margin: 0 auto;
+}
+
+.questionsContainer {
+  height: 100%;
+  margin-top: 20px;
+  position: absolute;
+  width: 100%;
+}
+
+.questionNumber {
+  font-size: 20px;
+  /* border: 1px solid red; */
+  /* margin-top: 30px; */
+  color: #0d4b7e;
+  margin-left: 30px;
+  /* margin-bottom: 30px; */
+}
+
+.questionText {
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 16px;
+  margin-left: 30px;
+  margin-top: 20px;
+}
+
+.answersBox {
+  /* height: 300px; */
+  background-color: #f9fafb;
+  width: 93%;
+  margin-top: 20px;
+  margin-left: 30px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-bottom: 20px;
+  padding-top: 5px;
+}
+
+.answerOption {
+  border: 0.7px solid #d9d9d9;
+  border-radius: 13px;
+  height: 50px;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+.answerLetterContainer {
+  width: 40px;
+  margin-left: 15px;
+  font-size: 17px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #d9d9d9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.answerText {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.8);
+  margin-left: 10px;
+}
+
+.correctAnswer {
+  border: 0.7px solid #22c55e;
+  /* box-shadow: rgba(2, 245, 43, 0.35) 0px 5px 15px; */
+  box-shadow: rgba(2, 245, 43, 0.24) 0px 3px 8px;
+  border-radius: 13px;
+  background-color: #f0fdf4;
+}
+
+.correctText {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-left: 25px;
+}
+.correctText p {
+  font-size: 15px;
+  color: #048233;
+  margin-left: 5px;
+}
+
+.explanationContainer {
+  border-top: 0.7px solid #d9d9d9;
+  height: 230px;
+  margin-top: 20px;
+  width: 93%;
+  margin-left: 30px;
+}
+.explanationTitle {
+  margin-top: 30px;
+  font-size: 17px;
+  color: #0e4b7e;
+}
+
+.explanationBody {
+  height: 150px;
+  background-color: #f6f4fe;
+  margin-top: 20px;
+  padding-left: 20px;
+  padding-top: 20px;
+  border-left: 5px solid blue;
+  border-top-left-radius: 13px;
+  border-bottom-left-radius: 13px;
+}
+.explanationBody p {
+  color: #1f2937;
+  font-size: 16px;
+  line-height: 25px;
+}
+
+.keyPointsSection {
+  height: 300px;
+  /* border: 1px solid red; */
+  margin-top: 40px;
+  width: 93%;
+  margin-left: 30px;
+}
+
+.keyPointsTitle {
+  font-size: 17px;
+  color: #0d4b7e;
+}
+
+.keyPointsBody {
+  height: 85%;
+  /* border: 1px solid green; */
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.keyPoint {
+  /* border: 1px solid red; */
+  display: flex;
+  /* align-items: center; */
+}
+.keyPoint span {
+  width: 7px;
+  height: 7px;
+  margin-top: 8px;
+  border-radius: 50%;
+  background-color: #535ae5;
+}
+.keyPoint p {
+  margin-left: 10px;
+  line-height: 22px;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.incorrectOptionsSection {
+  height: 220px;
+  background-color: #f9fafb;
+  border: 1px solid #f9fafb;
+  border-radius: 13px;
+  width: 93%;
+  margin-left: 30px;
+  margin-top: 20px;
+}
+.incorrectOptionsTitle {
+  font-size: 17px;
+  margin-top: 20px;
+  /* position: absolute; */
+  margin-left: 20px;
+}
+.incorrectOptionsTitle h4 {
+  font-weight: 600;
+}
+
+.incorrectOptionsBody {
+  height: 75%;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* border: 1px solid red; */
+}
+
+.incorrectOption {
+  display: flex;
+  /* align-items: center; */
+  margin-left: 20px;
+}
+.incorrectSvgContainer {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-color: #d9d9d9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* flex: 0.1; */
+}
+
+.incorrectOptionDescription {
+  line-height: 22px;
+  flex: 0.9;
+  margin-left: 10px;
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 16px;
+}
+
+.additionalResourcesSection {
+  background-color: #eff6ff;
+  border: 1px solid #eff6ff;
+  height: 190px;
+  border-radius: 13px;
+  width: 93%;
+  margin-left: 30px;
+  margin-top: 20px;
+}
+.resourcesTitle {
+  display: flex;
+  margin-left: 20px;
+  margin-top: 20px;
+  align-items: center;
+}
+.resourcesTitle svg {
+  color: blue;
+}
+.resourcesTitle h4 {
+  margin-left: 5px;
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.resourcesBody {
+  height: 75%;
+  /* border: 1px solid red; */
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.resource {
+  display: flex;
+  margin-left: 20px;
+}
+.resource p {
+  color: blue;
+  margin-left: 5px;
+  font-size: 16px;
+}
+
+.bottomPart {
+  background-color: #374151;
+  height: 70px;
+  display: flex;
+  padding-left: 20%;
+  padding-right: 20%;
+  align-items: center;
+  justify-content: space-between;
+}
+.previousBtn {
+  position: relative;
+  height: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
+  display: flex;
+  font-size: 17px;
+  font-weight: 500;
+  align-items: center;
+  border-radius: 8px;
+  background-color: #dcfce7;
+}
+.previousBtn span {
+  margin-right: 5px;
+  margin-top: 5px;
+}
+.previousBtn:hover {
+  cursor: pointer;
+}
+
+.nextBtn {
+  position: relative;
+  height: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
+  display: flex;
+  font-size: 17px;
+  font-weight: 500;
+  align-items: center;
+  border-radius: 8px;
+  background-color: #1d93f3;
+  color: #ffffff;
+}
+.nextBtn span {
+  margin-left: 5px;
+  margin-top: 5px;
+}
+.nextBtn:hover {
+  cursor: pointer;
+}
+
+@media (max-width: 359px) {
+  /* Styles for small phones */
+  .header {
+    /* border: 1px solid red; */
+    width: 98dvw;
+  }
+  .headerLeft {
+    padding-left: 15px;
+    /* border: 1px solid green; */
+    flex: 0.5;
+  }
+
+  .headerTitle {
+    margin-left: 10px;
+    gap: 5px;
+  }
+  .headerTitle h2 {
+    font-size: 20px;
+  }
+  .headerRight {
+    flex: 0.5;
+    padding-right: 15px;
+  }
+  .bookLive {
+    width: 120px;
+  }
+  .pageContainer {
+    width: 97vw;
+    height: 350vh;
+  }
+  .main {
+    /* border: 1px solid red; */
+    width: 100%;
+    margin-top: 12vh;
+  }
+  .mainHeader {
+    flex: 0.04;
+  }
+  .mainHeaderLeft {
+    padding-left: 20px;
+    flex: 0.4;
+  }
+  .mainHeaderRight {
+    padding-left: 10px;
+    padding-right: 0px;
+    text-align: center;
+    gap: 10px;
+    justify-content: flex-start;
+    display: flex;
+    flex: 0.6;
+  }
+  .mainBodySub {
+    width: 95%;
+  }
+  .answersBox {
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+  .explanationContainer {
+    margin: 0 auto;
+    height: auto;
+  }
+  .explanationBody {
+    height: auto;
+    padding-bottom: 10px;
+    padding-right: 10px;
+  }
+  .keyPointsSection {
+    height: auto;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+  .incorrectOptionsSection {
+    height: auto;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding-bottom: 10px;
+  }
+  .additionalResourcesSection {
+    height: auto;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding-bottom: 10px;
+  }
+  .bottomPart {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+@media (min-width: 360px) and (max-width: 399px) {
+  /* Styles for standard phones */
+  .header {
+    /* border: 1px solid red; */
+    width: 98dvw;
+  }
+  .headerLeft {
+    padding-left: 15px;
+    /* border: 1px solid green; */
+    flex: 0.5;
+  }
+
+  .headerTitle {
+    margin-left: 10px;
+    gap: 5px;
+  }
+  .headerTitle h2 {
+    font-size: 20px;
+  }
+  .headerRight {
+    flex: 0.5;
+    padding-right: 15px;
+  }
+  .bookLive {
+    width: 120px;
+  }
+  .pageContainer {
+    width: 97vw;
+    height: 350vh;
+    /* height: auto; */
+    /* border: 1px solid red; */
+  }
+
+  .main {
+    /* border: 1px solid red; */
+    width: 100%;
+    margin-top: 12vh;
+  }
+  .mainHeader {
+    flex: 0.04;
+  }
+  .mainHeaderLeft {
+    padding-left: 20px;
+    flex: 0.4;
+  }
+  .mainHeaderRight {
+    padding-left: 10px;
+    padding-right: 0px;
+    text-align: center;
+    gap: 10px;
+    justify-content: flex-start;
+    display: flex;
+    flex: 0.6;
+  }
+  .mainBodySub {
+    width: 95%;
+  }
+  .answersBox {
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+  .explanationContainer {
+    margin: 0 auto;
+    height: auto;
+  }
+  .explanationBody {
+    height: auto;
+    padding-bottom: 10px;
+    padding-right: 10px;
+  }
+  .keyPointsSection {
+    height: auto;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+  .incorrectOptionsSection {
+    height: auto;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding-bottom: 10px;
+  }
+  .additionalResourcesSection {
+    height: auto;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding-bottom: 10px;
+  }
+  .bottomPart {
+    padding-left: 10px;
+    padding-right: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+}
+
+@media (min-width: 400px) and (max-width: 430px) {
+  /* Styles for large phones and compact phablets */
+  .header {
+    /* border: 1px solid red; */
+    width: 98dvw;
+  }
+  .headerLeft {
+    padding-left: 15px;
+    /* border: 1px solid green; */
+    flex: 0.5;
+  }
+
+  .headerTitle {
+    margin-left: 10px;
+    gap: 5px;
+  }
+  .headerTitle h2 {
+    font-size: 20px;
+  }
+  .headerRight {
+    flex: 0.5;
+    padding-right: 15px;
+  }
+  .bookLive {
+    width: 120px;
+  }
+  .pageContainer {
+    width: 97vw;
+    height: 350vh;
+  }
+  .main {
+    /* border: 1px solid red; */
+    width: 100%;
+    margin-top: 12vh;
+  }
+  .mainHeader {
+    flex: 0.04;
+  }
+  .mainHeaderLeft {
+    padding-left: 20px;
+    flex: 0.4;
+  }
+  .mainHeaderRight {
+    padding-left: 10px;
+    padding-right: 0px;
+    text-align: center;
+    gap: 10px;
+    justify-content: flex-start;
+    display: flex;
+    flex: 0.6;
+  }
+  .mainBodySub {
+    width: 95%;
+  }
+  .answersBox {
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+  .explanationContainer {
+    margin: 0 auto;
+    height: auto;
+  }
+  .explanationBody {
+    height: auto;
+    padding-bottom: 10px;
+    padding-right: 10px;
+  }
+  .keyPointsSection {
+    height: auto;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+  .incorrectOptionsSection {
+    height: auto;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding-bottom: 10px;
+  }
+  .additionalResourcesSection {
+    height: auto;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding-bottom: 10px;
+  }
+  .bottomPart {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+@media (min-width: 431px) and (max-width: 600px) {
+  /* Styles for phablets and small tablets */
+  .header {
+    /* border: 1px solid red; */
+    width: 98dvw;
+  }
+  .headerLeft {
+    padding-left: 15px;
+    /* border: 1px solid green; */
+    flex: 0.5;
+  }
+
+  .headerTitle {
+    margin-left: 10px;
+    gap: 5px;
+  }
+  .headerTitle h2 {
+    font-size: 20px;
+  }
+  .headerRight {
+    flex: 0.5;
+    padding-right: 15px;
+  }
+  .bookLive {
+    width: 120px;
+  }
+  .pageContainer {
+    width: 97vw;
+    height: 350vh;
+  }
+  .main {
+    /* border: 1px solid red; */
+    width: 100%;
+    margin-top: 12vh;
+  }
+  .mainHeader {
+    flex: 0.04;
+  }
+  .mainHeaderLeft {
+    padding-left: 20px;
+    flex: 0.4;
+  }
+  .mainHeaderRight {
+    padding-left: 10px;
+    padding-right: 0px;
+    text-align: center;
+    gap: 10px;
+    justify-content: flex-start;
+    display: flex;
+    flex: 0.6;
+  }
+  .mainBodySub {
+    width: 95%;
+  }
+  .answersBox {
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+  .explanationContainer {
+    margin: 0 auto;
+    height: auto;
+  }
+  .explanationBody {
+    height: auto;
+    padding-bottom: 10px;
+    padding-right: 10px;
+  }
+  .keyPointsSection {
+    height: auto;
+    margin: 0 auto;
+    margin-top: 20px;
+  }
+  .incorrectOptionsSection {
+    height: auto;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding-bottom: 10px;
+  }
+  .additionalResourcesSection {
+    height: auto;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding-bottom: 10px;
+  }
+  .bottomPart {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+/* solving height issues */
+@media (max-width: 360px) {
+  .pageContainer {
+    height: 320vh;
+  }
+}

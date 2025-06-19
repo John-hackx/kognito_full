@@ -1,0 +1,467 @@
+.quizDetailsPage {
+  display: flex;
+  flex-direction: column;
+  height: 88.5vh;
+  margin-top: 10vh;
+  background-color: #eef4ff;
+}
+
+.quizDetailsMain {
+  /* background-color: #eef4ff; */
+  flex: 0.85;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+.subContainer {
+  /* border: 1px solid red; */
+  height: 85%;
+  margin-top: 30px;
+  display: flex;
+  gap: 30px;
+}
+.subContainerLeft {
+  background-color: #ffffff;
+  border-radius: 13px;
+  padding-left: 20px;
+  padding-right: 20px;
+  flex: 0.6;
+}
+.quizInformationTitle {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.flashCardsContainer {
+  /* border: 1px solid red; */
+  /* width: 95%; */
+  margin: 0 auto;
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+  /* gap: 10px; */
+  height: 130px;
+}
+
+.finishQuizCard {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.finishQuizCardSvgContainer {
+  margin-top: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.finishCardText {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.67);
+  margin-top: 5px;
+}
+.finishCardValue {
+  font-size: 20px;
+  margin-top: 5px;
+}
+
+.detailsContainer {
+  height: 140px;
+  border-top: 0.8px solid #d9d9d9;
+  margin-top: 30px;
+  display: flex;
+  padding-top: 30px;
+  flex-direction: column;
+  gap: 15px;
+}
+.detailsItem {
+  display: flex;
+  /* border: 1px solid red; */
+}
+.detailsItem span {
+  font-size: 17px;
+  color: rgba(0, 0, 0, 0.6);
+}
+.detailsItem p {
+  font-size: 17px;
+  color: rgba(0, 0, 0, 0.9);
+  margin-left: 10px;
+}
+
+.subContainerRight {
+  background-color: #ffffff;
+  border-radius: 13px;
+  flex: 0.4;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.instructionsTitle {
+  font-size: 18px;
+  margin-top: 20px;
+}
+.instructionsContainer {
+  /* border: 1px solid red; */
+  height: 78%;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.instructionItem {
+  display: flex;
+}
+.instructionItem svg {
+  flex: 0.1;
+}
+.instructionItem p {
+  font-size: 17px;
+  color: rgba(0, 0, 0, 0.7);
+  /* margin-left: 5px; */
+  flex: 0.9;
+}
+
+.quizDetailsFooter {
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  flex: 0.15;
+  padding-left: 100px;
+  padding-right: 100px;
+  justify-content: space-between;
+}
+.backBtn {
+  height: 50px;
+  width: 180px;
+  font-size: 17px;
+  border-radius: 10px;
+  border: 0.8px solid #ccc;
+  background: transparent;
+}
+.backBtn:hover {
+  cursor: pointer;
+  box-shadow: rgba(1, 104, 104, 0.35) 0px 5px 15px;
+  transition: all 0.3s ease-in;
+  color: #29696e;
+}
+.startQuizBtn {
+  height: 50px;
+  width: 180px;
+  font-size: 17px;
+  border-radius: 10px;
+  background-color: #29696e;
+  color: #ffffff;
+}
+.startQuizBtn:hover {
+  cursor: pointer;
+  box-shadow: rgba(1, 104, 104, 0.35) 0px 5px 15px;
+  background: transparent;
+  color: #29696e;
+  border: 0.8px solid #29696e;
+  transition: all 0.3s ease-in;
+}
+
+@media (max-width: 359px) {
+  /* Styles for small phones */
+
+  .quizDetailsPage {
+    /* padding-top: 10px; */
+    /* gap: 30px; */
+    height: 160vh;
+  }
+  .quizDetailsMain {
+    width: 90.8vw;
+    padding-left: 12px;
+    padding-right: 10px;
+    /* border: 1px solid red; */
+    /* overflow-y: scroll; */
+  }
+  .subContainer {
+    height: 100%;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    height: 90%;
+    margin-top: 15px;
+  }
+  .subContainerLeft {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .subContainerRight {
+    padding-bottom: 20px;
+  }
+  .flashCardsContainer {
+    gap: 10px;
+    height: 125px;
+  }
+  .finishCardText {
+    text-align: center;
+  }
+  .finishCardValue {
+    font-size: 18px;
+  }
+  .detailsItem span {
+    font-size: 16px;
+  }
+  .detailsItem p {
+    font-size: 16px;
+  }
+  .instructionItem p {
+    font-size: 16px;
+  }
+  .quizDetailsFooter {
+    height: 70px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 30px;
+    background-color: #ffffff;
+  }
+  .backBtn {
+    width: 100px;
+    font-size: 16px;
+  }
+  .startQuizBtn {
+    width: 100px;
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 360px) and (max-width: 399px) {
+  /* Styles for standard phones */
+  .quizDetailsPage {
+    /* padding-top: 10px; */
+    /* gap: 30px; */
+    height: 160vh;
+  }
+  .quizDetailsMain {
+    width: 90.8vw;
+    padding-left: 12px;
+    padding-right: 10px;
+    /* border: 1px solid red; */
+    /* overflow-y: scroll; */
+  }
+  .subContainer {
+    height: 100%;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    height: 90%;
+    margin-top: 15px;
+  }
+  .subContainerLeft {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .subContainerRight {
+    padding-bottom: 20px;
+  }
+  .flashCardsContainer {
+    gap: 10px;
+    height: 125px;
+  }
+  .finishCardText {
+    text-align: center;
+  }
+  .finishCardValue {
+    font-size: 18px;
+  }
+  .detailsItem span {
+    font-size: 16px;
+  }
+  .detailsItem p {
+    font-size: 16px;
+  }
+  .instructionItem p {
+    font-size: 16px;
+  }
+  .quizDetailsFooter {
+    height: 70px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 30px;
+    background-color: #ffffff;
+  }
+  .backBtn {
+    width: 100px;
+    font-size: 16px;
+  }
+  .startQuizBtn {
+    width: 100px;
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 400px) and (max-width: 430px) {
+  /* Styles for large phones and compact phablets */
+
+  .quizDetailsPage {
+    /* padding-top: 10px; */
+    /* gap: 30px; */
+    height: 160vh;
+  }
+  .quizDetailsMain {
+    width: 90.8vw;
+    padding-left: 12px;
+    padding-right: 10px;
+    /* border: 1px solid red; */
+    /* overflow-y: scroll; */
+  }
+  .subContainer {
+    height: 100%;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    height: 90%;
+    margin-top: 15px;
+  }
+  .subContainerLeft {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .subContainerRight {
+    padding-bottom: 20px;
+  }
+  .flashCardsContainer {
+    gap: 10px;
+    height: 125px;
+  }
+  .finishCardText {
+    text-align: center;
+  }
+  .finishCardValue {
+    font-size: 18px;
+  }
+  .detailsItem span {
+    font-size: 16px;
+  }
+  .detailsItem p {
+    font-size: 16px;
+  }
+  .instructionItem p {
+    font-size: 16px;
+  }
+  .quizDetailsFooter {
+    height: 70px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 30px;
+    background-color: #ffffff;
+  }
+  .backBtn {
+    width: 100px;
+    font-size: 16px;
+  }
+  .startQuizBtn {
+    width: 100px;
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 431px) and (max-width: 600px) {
+  /* Styles for phablets and small tablets */
+
+  .quizDetailsPage {
+    /* padding-top: 10px; */
+    /* gap: 30px; */
+    height: 160vh;
+  }
+  .quizDetailsMain {
+    width: 90.8vw;
+    padding-left: 20px;
+    padding-right: 10px;
+    /* border: 1px solid red; */
+    /* overflow-y: scroll; */
+  }
+  .subContainer {
+    height: 100%;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    height: 90%;
+    margin-top: 15px;
+  }
+  .subContainerLeft {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .subContainerRight {
+    padding-bottom: 20px;
+  }
+  .flashCardsContainer {
+    gap: 10px;
+    height: 125px;
+  }
+  .finishCardText {
+    text-align: center;
+  }
+  .finishCardValue {
+    font-size: 18px;
+  }
+  .detailsItem span {
+    font-size: 16px;
+  }
+  .detailsItem p {
+    font-size: 16px;
+  }
+  .instructionItem p {
+    font-size: 16px;
+  }
+  .quizDetailsFooter {
+    height: 70px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 30px;
+    background-color: #ffffff;
+  }
+  .backBtn {
+    width: 100px;
+    font-size: 16px;
+  }
+  .startQuizBtn {
+    width: 100px;
+    font-size: 16px;
+  }
+}
+
+@media (min-height: 850px) {
+  .quizDetailsPage {
+    /* padding-top: 10px; */
+    /* gap: 30px; */
+    height: 120vh;
+  }
+}
+
+@media (min-height: 900px) {
+  .quizDetailsPage {
+    /* padding-top: 10px; */
+    /* gap: 30px; */
+    height: 110vh;
+  }
+}
+
+@media (min-height: 950px) {
+  .quizDetailsPage {
+    /* padding-top: 10px; */
+    /* gap: 30px; */
+    height: 95vh;
+  }
+}

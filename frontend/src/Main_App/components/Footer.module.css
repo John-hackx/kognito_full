@@ -1,0 +1,266 @@
+.footer {
+  height: 400px;
+  background-color: #1f2937;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.footerTop {
+  /* border: 1px solid red; */
+  width: 90%;
+  flex: 0.8;
+  padding-top: 50px;
+  padding-bottom: 20px;
+  display: flex;
+}
+.footerTopFirst {
+  flex: 0.25;
+  /* border: 1px solid black; */
+}
+.logo {
+  width: 200px;
+  /* border: 1px solid red; */
+}
+.description {
+  color: #9ca3af;
+  font-size: 16px;
+  margin-top: 20px;
+}
+.socialIcons {
+  display: flex;
+  margin-top: 20px;
+}
+.socialIcons img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.footerTopSecond {
+  flex: 0.25;
+  /* border: 1px solid black; */
+}
+.footerTopSecond h3 {
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 20px;
+  margin-top: 20px;
+}
+.footerTopSecond ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 35px;
+}
+.footerTopSecond ul li {
+  list-style: none;
+}
+.footerTopSecond ul li a {
+  text-decoration: none;
+  color: #9ca3af;
+}
+
+.footerTopThird {
+  flex: 0.25;
+  /* border: 1px solid black; */
+}
+.footerTopThird h3 {
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 20px;
+  margin-top: 20px;
+}
+.footerTopThird ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 35px;
+}
+.footerTopThird ul li {
+  list-style: none;
+}
+.footerTopThird ul li a {
+  text-decoration: none;
+  color: #9ca3af;
+}
+
+.footerTopFourth {
+  flex: 0.25;
+  position: relative;
+  /* border: 1px solid black; */
+}
+.footerTopFourth h3 {
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 20px;
+  margin-top: 20px;
+}
+.footerTopFourth p {
+  color: #9ca3af;
+  margin-top: 35px;
+}
+.inputSection {
+  display: flex;
+}
+.footerTopFourth input {
+  margin-top: 20px;
+  height: 43px;
+  border-top-left-radius: 13px;
+  border-bottom-left-radius: 13px;
+  padding: 10px;
+  outline: none;
+  font-size: 15px;
+}
+.footerTopFourth button {
+  height: 43px;
+  background-color: #26696f;
+  color: #ffffff;
+  padding: 5px;
+  margin-top: 20px;
+  font-size: 15px;
+  width: 70px;
+  border-top-right-radius: 13px;
+  border-bottom-right-radius: 13px;
+}
+.footerTopFourth button:hover {
+  cursor: pointer;
+}
+
+.footerBottom {
+  width: 90%;
+  flex: 0.2;
+  /* border: 1px solid greenyellow; */
+}
+.footerBottom p {
+  font-size: 15px;
+  color: #9ca3af;
+  text-align: center;
+}
+
+/* --------------Responsive styles for Footer------------ */
+
+.footer {
+  height: auto; /* Changed from fixed height */
+  min-height: 400px; /* Minimum height */
+  background-color: #1f2937;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0; /* Added padding */
+}
+
+.footerTop {
+  width: 90%;
+  flex: 1; /* Changed from 0.8 to use available space */
+  padding: 30px 0; /* Adjusted padding */
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap on mobile */
+}
+
+.footerTopFirst,
+.footerTopSecond,
+.footerTopThird,
+.footerTopFourth {
+  flex: 1 1 100%; /* Full width on mobile */
+  min-width: 250px; /* Minimum width for each column */
+  padding: 15px 0; /* Added padding between sections */
+  /* Removed borders */
+}
+
+.logo {
+  width: 150px; /* Slightly smaller on mobile */
+}
+
+.description {
+  font-size: 14px; /* Slightly smaller text */
+}
+
+.socialIcons {
+  justify-content: center; /* Center icons on mobile */
+}
+
+.footerTopSecond h3,
+.footerTopThird h3,
+.footerTopFourth h3 {
+  font-size: 18px; /* Slightly smaller headings */
+  margin-top: 15px;
+}
+
+.footerTopSecond ul,
+.footerTopThird ul {
+  margin-top: 20px; /* Reduced margin */
+  gap: 8px; /* Slightly smaller gap */
+}
+
+.footerTopFourth p {
+  margin-top: 20px; /* Reduced margin */
+}
+
+.inputSection {
+  flex-direction: column; /* Stack input and button vertically */
+}
+
+.footerTopFourth input {
+  width: 100%; /* Full width input */
+  border-radius: 13px; /* Apply radius to all sides */
+  margin-top: 15px;
+}
+
+.footerTopFourth button {
+  width: 100%; /* Full width button */
+  border-radius: 13px; /* Apply radius to all sides */
+  margin-top: 10px; /* Reduced margin */
+  margin-left: 0; /* Remove left margin */
+}
+
+.footerBottom {
+  width: 90%;
+  padding: 20px 0; /* Added padding */
+  /* Removed border */
+}
+
+.footerBottom p {
+  font-size: 14px; /* Slightly smaller text */
+}
+
+/* Tablet view (2 columns) */
+@media (min-width: 600px) {
+  .footerTopFirst,
+  .footerTopSecond,
+  .footerTopThird,
+  .footerTopFourth {
+    flex: 1 1 50%; /* 2 columns */
+  }
+}
+
+/* Desktop view (4 columns) */
+@media (min-width: 992px) {
+  .footerTopFirst,
+  .footerTopSecond,
+  .footerTopThird,
+  .footerTopFourth {
+    flex: 0.25; /* 4 columns */
+  }
+
+  .inputSection {
+    flex-direction: row; /* Side-by-side on desktop */
+  }
+
+  .footerTopFourth button {
+    width: 70px; /* Fixed width on desktop */
+    margin-left: -1px; /* Connect to input */
+  }
+
+  .footerTopFourth input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .footerTopFourth button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}

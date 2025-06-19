@@ -1,0 +1,641 @@
+.navbar {
+  height: 10vh;
+  width: 99.9%;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  box-shadow: 0px -6px 33px -5px rgba(0, 0, 0, 0.32);
+  background-color: #ffffff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+}
+
+.navbarLeft {
+  flex: 0.3;
+  /* border: 1px solid red; */
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+.logo {
+  padding-left: 50px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  /* border: 1px solid blue; */
+}
+.logo img {
+  height: 80%;
+  max-width: 100%;
+  object-fit: contain;
+}
+.logo img:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  transition: all 0.3s ease-in-out;
+}
+
+.navbarMiddle {
+  box-sizing: border-box;
+  /* border: 1px solid red; */
+  flex: 0.4;
+}
+.linksContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.linksContainer ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  font-size: 16px;
+}
+.linksContainer ul li a {
+  color: rgba(0, 0, 0, 0.8);
+  text-decoration: none;
+}
+
+.navbarRight {
+  /* border: 1px solid red; */
+  box-sizing: border-box;
+  flex: 0.3;
+}
+.navbarBtnsContainer {
+  height: 100%;
+  display: flex;
+  width: 100%;
+  /* border: 1px solid green; */
+  gap: 20px;
+  align-items: center;
+  justify-content: flex-end;
+}
+.navbarSignInBtn {
+  height: 37px;
+  width: 76px;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  color: #ffffff;
+  background-color: #319c7b;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+}
+.navbarSignInBtn:hover {
+  color: #27696e;
+  background-color: #ffffff;
+  border: 1px solid #27696e;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+.navbarSignUpBtn {
+  margin-right: 50px;
+  height: 37px;
+  width: 150px;
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  color: #27696e;
+  font-size: 16px;
+  text-decoration: none;
+  border: 1px solid #27696e;
+  background-color: #ffffff;
+  font-weight: 500;
+}
+.navbarSignUpBtn span {
+  margin-left: 4px;
+  margin-top: 4px;
+}
+.navbarSignUpBtn:hover {
+  color: #ffffff;
+  background-color: #27696e;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+/* responsive design */
+
+@media only screen and (max-width: 320px) {
+  /* Targets devices like iPhone 5/SE */
+}
+
+@media only screen and (min-width: 321px) and (max-width: 375px) {
+  /* Targets devices like iPhone 6/7/8 (standard) */
+  .linksContainer {
+    display: none;
+  }
+  .navbarRight {
+    flex: 0.6;
+  }
+  .navbarSignUpBtn {
+    display: none;
+  }
+  .navbarSignInBtn {
+    margin-right: 12vw;
+    height: 6vh;
+    font-size: 1.15rem;
+    color: #1f8b69;
+    background-color: transparent;
+  }
+  .navbarLeft {
+    flex: 0.6;
+  }
+  .logo {
+    padding-left: 3vw;
+  }
+  .logo img {
+    object-fit: contain;
+    height: 100%;
+  }
+  .navbarRight {
+    display: flex;
+    align-items: center;
+  }
+  .navbarRight svg {
+    position: absolute;
+    right: 4vw;
+  }
+  .navbarRight svg:hover {
+    cursor: pointer;
+  }
+  .mobileLinksContainer {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 10vh;
+    left: 0;
+    right: 0;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0px -6px 33px -5px rgba(0, 0, 0, 0.32);
+    z-index: 9998;
+  }
+
+  .mobileLinksContainer ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 1.2rem;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+  }
+  .mobileLinksContainer ul li a {
+    color: rgba(0, 0, 0, 0.8);
+    text-decoration: none;
+  }
+  .navbarBtnsContainerMobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: center;
+  }
+  .navbarSignInBtnSide {
+    height: 37px;
+    width: 76px;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    color: #ffffff;
+    background-color: #319c7b;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .navbarSignInBtnSide:hover {
+    color: #27696e;
+    background-color: #ffffff;
+    border: 1px solid #27696e;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+  }
+  .navbarSignUpBtnSide {
+    /* margin-right: 50px; */
+    height: 37px;
+    width: 150px;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    color: #27696e;
+    font-size: 16px;
+    text-decoration: none;
+    border: 1px solid #27696e;
+    background-color: #ffffff;
+    font-weight: 500;
+  }
+  .navbarSignUpBtnSide span {
+    margin-left: 4px;
+    margin-top: 4px;
+  }
+  .navbarSignUpBtnSide:hover {
+    color: #ffffff;
+    background-color: #27696e;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+  }
+}
+
+@media only screen and (min-width: 376px) and (max-width: 414px) {
+  /* Targets devices like iPhone 6/7/8 Plus, iPhone X/XS/11 Pro */
+  .linksContainer {
+    display: none;
+  }
+  .navbarRight {
+    flex: 0.6;
+  }
+  .navbarSignUpBtn {
+    display: none;
+  }
+  .navbarSignInBtn {
+    margin-right: 12vw;
+    height: 6vh;
+    font-size: 1.15rem;
+    color: #1f8b69;
+    background-color: transparent;
+  }
+  .navbarLeft {
+    flex: 0.6;
+  }
+  .logo {
+    padding-left: 3vw;
+  }
+  .logo img {
+    object-fit: contain;
+    height: 100%;
+  }
+  .navbarRight {
+    display: flex;
+    align-items: center;
+  }
+  .navbarRight svg {
+    position: absolute;
+    right: 4vw;
+  }
+  .navbarRight svg:hover {
+    cursor: pointer;
+  }
+  .mobileLinksContainer {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 10vh;
+    left: 0;
+    right: 0;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0px -6px 33px -5px rgba(0, 0, 0, 0.32);
+    z-index: 9998;
+  }
+
+  .mobileLinksContainer ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 1.2rem;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+  }
+  .mobileLinksContainer ul li a {
+    color: rgba(0, 0, 0, 0.8);
+    text-decoration: none;
+  }
+  .navbarBtnsContainerMobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: center;
+  }
+  .navbarSignInBtnSide {
+    height: 37px;
+    width: 76px;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    color: #ffffff;
+    background-color: #319c7b;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .navbarSignInBtnSide:hover {
+    color: #27696e;
+    background-color: #ffffff;
+    border: 1px solid #27696e;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+  }
+  .navbarSignUpBtnSide {
+    /* margin-right: 50px; */
+    height: 37px;
+    width: 150px;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    color: #27696e;
+    font-size: 16px;
+    text-decoration: none;
+    border: 1px solid #27696e;
+    background-color: #ffffff;
+    font-weight: 500;
+  }
+  .navbarSignUpBtnSide span {
+    margin-left: 4px;
+    margin-top: 4px;
+  }
+  .navbarSignUpBtnSide:hover {
+    color: #ffffff;
+    background-color: #27696e;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+  }
+}
+
+@media only screen and (min-width: 415px) and (max-width: 480px) {
+  /* Targets larger phones and small phablets */
+  .linksContainer {
+    display: none;
+  }
+  .navbarRight {
+    flex: 0.6;
+  }
+  .navbarSignUpBtn {
+    display: none;
+  }
+  .navbarSignInBtn {
+    margin-right: 12vw;
+    height: 6vh;
+    font-size: 1.15rem;
+    color: #1f8b69;
+    background-color: transparent;
+  }
+  .navbarLeft {
+    flex: 0.6;
+  }
+  .logo {
+    padding-left: 3vw;
+  }
+  .logo img {
+    object-fit: contain;
+    height: 100%;
+  }
+  .navbarRight {
+    display: flex;
+    align-items: center;
+  }
+  .navbarRight svg {
+    position: absolute;
+    right: 4vw;
+  }
+  .navbarRight svg:hover {
+    cursor: pointer;
+  }
+  .mobileLinksContainer {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 10vh;
+    left: 0;
+    right: 0;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0px -6px 33px -5px rgba(0, 0, 0, 0.32);
+    z-index: 9998;
+  }
+
+  .mobileLinksContainer ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 1.2rem;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+  }
+  .mobileLinksContainer ul li a {
+    color: rgba(0, 0, 0, 0.8);
+    text-decoration: none;
+  }
+  .navbarBtnsContainerMobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: center;
+  }
+  .navbarSignInBtnSide {
+    height: 37px;
+    width: 76px;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    color: #ffffff;
+    background-color: #319c7b;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .navbarSignInBtnSide:hover {
+    color: #27696e;
+    background-color: #ffffff;
+    border: 1px solid #27696e;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+  }
+  .navbarSignUpBtnSide {
+    /* margin-right: 50px; */
+    height: 37px;
+    width: 150px;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    color: #27696e;
+    font-size: 16px;
+    text-decoration: none;
+    border: 1px solid #27696e;
+    background-color: #ffffff;
+    font-weight: 500;
+  }
+  .navbarSignUpBtnSide span {
+    margin-left: 4px;
+    margin-top: 4px;
+  }
+  .navbarSignUpBtnSide:hover {
+    color: #ffffff;
+    background-color: #27696e;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+  }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 767px) {
+  /* Targets devices like iPhone 12/13 Pro Max, Samsung Galaxy S20/S21 Ultra */
+  .linksContainer {
+    display: none;
+  }
+  .navbarRight {
+    flex: 0.6;
+  }
+  .navbarSignUpBtn {
+    display: none;
+  }
+  .navbarSignInBtn {
+    margin-right: 12vw;
+    height: 6vh;
+    font-size: 1.15rem;
+    color: #1f8b69;
+    background-color: transparent;
+  }
+  .navbarLeft {
+    flex: 0.6;
+  }
+  .logo {
+    padding-left: 3vw;
+  }
+  .logo img {
+    object-fit: contain;
+    height: 100%;
+  }
+  .navbarRight {
+    display: flex;
+    align-items: center;
+  }
+  .navbarRight svg {
+    position: absolute;
+    right: 4vw;
+  }
+  .navbarRight svg:hover {
+    cursor: pointer;
+  }
+  .mobileLinksContainer {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 10vh;
+    left: 0;
+    right: 0;
+    background-color: #ffffff;
+    padding: 20px;
+    box-shadow: 0px -6px 33px -5px rgba(0, 0, 0, 0.32);
+    z-index: 9998;
+  }
+
+  .mobileLinksContainer ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 1.2rem;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+  }
+  .mobileLinksContainer ul li a {
+    color: rgba(0, 0, 0, 0.8);
+    text-decoration: none;
+  }
+  .navbarBtnsContainerMobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    justify-content: center;
+  }
+  .navbarSignInBtnSide {
+    height: 37px;
+    width: 76px;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    color: #ffffff;
+    background-color: #319c7b;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .navbarSignInBtnSide:hover {
+    color: #27696e;
+    background-color: #ffffff;
+    border: 1px solid #27696e;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+  }
+  .navbarSignUpBtnSide {
+    /* margin-right: 50px; */
+    height: 37px;
+    width: 150px;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    color: #27696e;
+    font-size: 16px;
+    text-decoration: none;
+    border: 1px solid #27696e;
+    background-color: #ffffff;
+    font-weight: 500;
+  }
+  .navbarSignUpBtnSide span {
+    margin-left: 4px;
+    margin-top: 4px;
+  }
+  .navbarSignUpBtnSide:hover {
+    color: #ffffff;
+    background-color: #27696e;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  /* Targets devices like iPad Mini, iPad (standard) in portrait */
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1279px) {
+  /* Targets devices like iPad Pro 10.5", iPad in landscape */
+}
