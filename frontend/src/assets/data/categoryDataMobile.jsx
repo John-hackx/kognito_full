@@ -15,7 +15,7 @@ export const categories = [
       </svg>
     ),
     text: "Dashboard",
-    link: "/",
+    link: "/app",
   },
   {
     svg: (
@@ -33,7 +33,7 @@ export const categories = [
       </svg>
     ),
     text: "My Courses",
-    link: "/courses",
+    link: "/app/courses",
   },
   {
     svg: (
@@ -51,7 +51,7 @@ export const categories = [
       </svg>
     ),
     text: "Calendar",
-    link: "/calendar",
+    link: "/app/calendar",
   },
   {
     svg: (
@@ -69,7 +69,7 @@ export const categories = [
       </svg>
     ),
     text: "Messages",
-    link: "/messages",
+    link: "/app/messages",
   },
   {
     svg: (
@@ -87,7 +87,7 @@ export const categories = [
       </svg>
     ),
     text: "Quiz Hub",
-    link: "/quizhub/home",
+    link: "/app/quizhub/home",
   },
   {
     svg: (
@@ -105,7 +105,7 @@ export const categories = [
       </svg>
     ),
     text: "Practice Test",
-    link: "/practicetest",
+    link: "/app/practicetest",
   },
 
   {
@@ -124,7 +124,7 @@ export const categories = [
       </svg>
     ),
     text: "Certificates",
-    link: "/certificates",
+    link: "/app/certificates",
   },
 
   {
@@ -143,7 +143,7 @@ export const categories = [
       </svg>
     ),
     text: "Preferences",
-    link: "/preferences",
+    link: "/app/preferences",
   },
   {
     svg: (
@@ -161,6 +161,6 @@ export const categories = [
       </svg>
     ),
     text: "Help",
-    link: "/help",
+    link: "/app/help",
   },
 ];
