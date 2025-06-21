@@ -2,7 +2,7 @@ import axios from "axios";
 import useAuthStore from "../stores/authStore";
 
 // Set base URL for all requests
-axios.defaults.baseURL = "http://localhost:5000";
+export const baseURL = "https://kognito-full.onrender.com";
 
 // Important: Set withCredentials globally if all requests need cookies
 axios.defaults.withCredentials = true;

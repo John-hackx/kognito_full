@@ -3,17 +3,27 @@ import { useEffect, useState } from "react";
 import clsx from "clsx";
 import progileImage from "/images/profile-pic.jpg";
 import { categories } from "../../assets/data/categoryDataMobile";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import useAuthStore from "../../stores/authStore";
 
 function MobileSideBar({ sidebarRef, setIsMenuOpen }) {
   const [windowHeight, setWindowHeight] = useState(() => window.innerHeight);
+  const { logOut } = useAuthStore();
   const location = useLocation();
+  const navigate = useNavigate();
   const pathname = location.pathname;
 
   console.log(pathname);
 
   const closeSidebarMenu = () => {
     setIsMenuOpen(false);
+  };
+
+  const handleLogout = async () => {
+    const res = await logOut();
+    if (res.success === true) {
+      navigate("/app");
+    }
   };
 
   useEffect(function () {
@@ -65,7 +75,7 @@ function MobileSideBar({ sidebarRef, setIsMenuOpen }) {
           </svg>
           <p>Upgrade plan</p>
         </div>
-        <div className={styles.logout}>
+        <div role="button" onClick={handleLogout} className={styles.logout}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24px"

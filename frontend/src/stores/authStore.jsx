@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import axios from "axios";
+import { baseURL } from "../api/api";
 
 const useAuthStore = create((set) => ({
   user: null,
@@ -14,13 +15,9 @@ const useAuthStore = create((set) => ({
   signUp: async (formData) => {
     set({ isLoading: true, error: null });
     try {
-      const res = await axios.post(
-        "http://localhost:5000/api/auth/signup",
-        formData,
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await axios.post(`${baseURL}/api/auth/signup`, formData, {
+        withCredentials: true,
+      });
 
       set({
         user: res.data.data,
@@ -35,13 +32,9 @@ const useAuthStore = create((set) => ({
   logIn: async (formData) => {
     set({ isLoading: true, error: null });
     try {
-      const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        formData,
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await axios.post(`${baseURL}/api/auth/login`, formData, {
+        withCredentials: true,
+      });
 
       set({ user: res.data.data, isLoading: false });
       return res.data.data;
@@ -54,7 +47,7 @@ const useAuthStore = create((set) => ({
     set({ isLoading: true });
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/logout",
+        `${baseURL}/api/auth/logout`,
         {},
         { withCredentials: true }
       );
@@ -68,14 +61,14 @@ const useAuthStore = create((set) => ({
   checkAuth: async () => {
     set({ isLoading: true, error: null });
     try {
-      const res = await axios.get("http://localhost:5000/api/auth/me", {
+      const res = await axios.get(`${baseURL}/api/auth/me`, {
         withCredentials: true,
       });
-      set({ user: res.data.data, isLoading: false });
-      return res.data.data;
+      set({ user: res.data?.data, isLoading: false });
+      return res.data?.data;
     } catch (error) {
       console.log(error.response);
-      set({ error: error.response.data.error });
+      set({ error: error.response?.data.error });
     }
   },
 }));
