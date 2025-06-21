@@ -22,7 +22,7 @@ function MobileSideBar({ sidebarRef, setIsMenuOpen }) {
   const handleLogout = async () => {
     const res = await logOut();
     if (res.success === true) {
-      navigate("/app");
+      navigate("/");
     }
   };
 
