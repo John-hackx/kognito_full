@@ -6,8 +6,10 @@ import vectorImage1 from "../../assets/images/review-icon.svg";
 import vectorImage2 from "../../assets/images/vectorImage1.svg";
 import clsx from "clsx";
 import { useLocation } from "react-router-dom";
+import useAuthStore from "../../stores/authStore";
 
 function AuthContainer() {
+  const { user } = useAuthStore();
   const [isLogin, setIsLogin] = useState(true);
   const location = useLocation();
 
@@ -18,6 +20,8 @@ function AuthContainer() {
       setIsLogin(false);
     }
   }, [location.state?.isLogin]);
+
+  console.log(user);
 
   return (
     <div className={styles.authPage}>

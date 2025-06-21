@@ -36,7 +36,7 @@ function LandingPageHeader() {
               <Link to="#home">About</Link>
             </li>
             <li>
-              <Link to="#home">Services</Link>
+              <Link to="#services">Services</Link>
             </li>
             <li>
               <Link to="#home">Courses</Link>

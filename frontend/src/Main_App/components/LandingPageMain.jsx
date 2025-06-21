@@ -390,8 +390,9 @@ function BlogSection() {
         </div>
         <div className={styles.blogSectionBody}>
           <div className={styles.blogSectionBodyContainer}>
-            {blogs.map((blog) => (
+            {blogs.map((blog, index) => (
               <BlogCard
+                key={index}
                 title={blog.title}
                 image={blog.image}
                 description={blog.description}
@@ -613,8 +614,9 @@ function CoursesSection() {
           <h2>A broad selection of courses</h2>
         </div>
         <div className={styles.coursesBody}>
-          {courses.map((course) => (
+          {courses.map((course, index) => (
             <CourseCard
+              key={index}
               title={course.title}
               level={course.level}
               lessons={course.lessons}
@@ -794,8 +796,9 @@ function CategoriesSection() {
           <h2>Explore Courses by Field</h2>
         </div>
         <div className={styles.categoriesBody}>
-          {categories.map((item) => (
+          {categories.map((item, index) => (
             <CategoryCard
+              key={index}
               text={item.text}
               svgBgColor={item.svgBgColor}
               cardBgColor={item.cardBgColor}
@@ -854,8 +857,9 @@ function AccreditationSection() {
           </h2>
         </div>
         <div className={styles.accreditationCards}>
-          {whyChooseUsArr.map((item) => (
+          {whyChooseUsArr.map((item, index) => (
             <AccreditationCard
+              key={index}
               svg={item.svg}
               title={item.title}
               description={item.description}
@@ -927,14 +931,14 @@ function Hero({ trustedImages, navigate }) {
               />
               <div className={styles.progressDots}>
                 {newCoursesSlides.map((_, index) => (
-                  <ProgressDot isActive={index === currentIndex} />
+                  <ProgressDot key={index} isActive={index === currentIndex} />
                 ))}
               </div>
             </div>
             <div className={styles.heroRightBottom}>
               <div className={styles.trustedLeft}>
-                {trustedImages.map((image) => (
-                  <TrustedCircle image={image} />
+                {trustedImages.map((image, index) => (
+                  <TrustedCircle key={index} image={image} />
                 ))}
               </div>
               <div className={styles.trustedRight}>
@@ -1039,8 +1043,8 @@ function HeroCourseCard({
         transition: `transform 0.5s ease-in-out`,
       }}
     >
-      {newCoursesSlides.map((course) => (
-        <div className={styles.heroCourseCard}>
+      {newCoursesSlides.map((course, index) => (
+        <div key={index} className={styles.heroCourseCard}>
           <div className={styles.newBadge}>New</div>
           <div className={styles.heroCourseCardTop}>
             <div className={styles.heroCourseCardTopContainer}>

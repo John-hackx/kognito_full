@@ -92,8 +92,9 @@
   margin-left: 30px;
   align-self: center;
 }
-.profileHealth svg {
-  color: rgb(69, 228, 82);
+.profileHealth svg:hover {
+  color: rgb(20, 20, 20);
+  cursor: pointer;
 }
 
 /* Responsive design mobile */

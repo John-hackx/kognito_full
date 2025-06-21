@@ -24,8 +24,11 @@ import { useEffect, useState } from "react";
 import { ScrollToTop } from "./Main_App/components/ScrollToTop";
 import LandingPage from "./Main_App/pages/LandingPage";
 import AuthContainer from "./Main_App/pages/AuthContainer";
+import useAuthStore from "./stores/authStore";
+import ProtectedRoute from "./Main_App/components/ProtectedRoute";
 function App() {
   const [windowWidth, setWindowWidth] = useState(() => window.innerWidth);
+  const { user, isLoading, checkAuth } = useAuthStore();
 
   useEffect(function () {
     const getWindowWidth = () => {
@@ -36,19 +39,68 @@ function App() {
     return () => window.removeEventListener("resize", getWindowWidth);
   }, []);
 
+  useEffect(() => {
+    if (!user && !isLoading) {
+      checkAuth();
+    }
+  }, [checkAuth, user, isLoading]);
+
+  console.log(user);
+
   return (
     <WindowSizeContext.Provider value={{ windowWidth }}>
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/auth" element={<AuthContainer />} />
-          <Route path="/app" element={<DashboardPage />} />
-          <Route path="/app/courses" element={<CoursesPage />} />
-          <Route path="/app/calendar" element={<CalenderPage />} />
-          <Route path="/app/messages" element={<MessagesPage />} />
+          <Route
+            path="/auth"
+            element={user ? <Navigate to="/app" replace /> : <AuthContainer />}
+          />
+          <Route
+            path="/app"
+            element={
+              <ProtectedRoute>
+                {" "}
+                <DashboardPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/app/courses"
+            element={
+              <ProtectedRoute>
+                <CoursesPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/app/calendar"
+            element={
+              <ProtectedRoute>
+                {" "}
+                <CalenderPage />{" "}
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/app/messages"
+            element={
+              <ProtectedRoute>
+                {" "}
+                <MessagesPage />
+              </ProtectedRoute>
+            }
+          />
 
-          <Route path="/app/quizhub" element={<QuizHubDashboard />}>
+          <Route
+            path="/app/quizhub"
+            element={
+              <ProtectedRoute>
+                <QuizHubDashboard />
+              </ProtectedRoute>
+            }
+          >
             <Route index element={<Navigate to="home" replace />} />
             <Route path="home" element={<QuizHubHome />} />
             <Route path="quizzes" element={<QuizzesPage />} />
@@ -57,13 +109,62 @@ function App() {
             <Route path="practice" element={<PracticePage />} />
             <Route path="tutors" element={<TutorConsultPage />} />
           </Route>
-          <Route path="practicetest" element={<PracticeTestPage />} />
-          <Route path="bookmarks" element={<BookmarksPage />} />
-          <Route path="certificates" element={<CertificatesPage />} />
-          <Route path="downloads" element={<DownloadsPage />} />
-          <Route path="account" element={<AccountPage />} />
-          <Route path="preferences" element={<PreferencesPage />} />
-          <Route path="help" element={<HelpPage />} />
+          <Route
+            path="practicetest"
+            element={
+              <ProtectedRoute>
+                <PracticeTestPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="bookmarks"
+            element={
+              <ProtectedRoute>
+                <BookmarksPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="certificates"
+            element={
+              <ProtectedRoute>
+                <CertificatesPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="downloads"
+            element={
+              <ProtectedRoute>
+                <DownloadsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="account"
+            element={
+              <ProtectedRoute>
+                <AccountPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="preferences"
+            element={
+              <ProtectedRoute>
+                <PreferencesPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="help"
+            element={
+              <ProtectedRoute>
+                <HelpPage />
+              </ProtectedRoute>
+            }
+          />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>

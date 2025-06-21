@@ -1,17 +1,54 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./LoginPage.module.css";
 import googleIcon from "../../assets/images/google.png";
 import facebookIcon from "../../assets/images/facebook.png";
 import twitterIcon from "../../assets/images/twitter.png";
 import linkedinIcon from "../../assets/images/linkedin.png";
+import { useEffect, useState } from "react";
+import useAuthStore from "../../stores/authStore";
 
 function LoginPage() {
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const { isLoading, error, setError, setLoading, logIn } = useAuthStore();
+  const navigate = useNavigate();
+
+  const handleOnChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const user = await logIn(formData);
+      if (user) {
+        navigate("/app");
+      }
+    } catch (error) {
+      console.log("Error from loginPage: ", error);
+    }
+  };
+
+  useEffect(() => {
+    setError(null);
+    setLoading(null);
+  }, [setError, setLoading]);
+
   return (
     <div className={styles.login}>
       <div className={styles.loginTitle}>
         <h1>Sign In</h1>
       </div>
-      <form>
+      {error ? (
+        <div className={styles.errorMessage}>
+          <p>{error}</p>
+        </div>
+      ) : (
+        ""
+      )}
+      <form onSubmit={handleSubmit}>
         <div className={styles.emailInput}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -26,6 +63,8 @@ function LoginPage() {
             type="email"
             name="email"
             id="email"
+            onChange={handleOnChange}
+            value={formData.email}
             required
             placeholder="Enter your email"
           />
@@ -44,12 +83,18 @@ function LoginPage() {
             type="password"
             name="password"
             id="password"
+            onChange={handleOnChange}
+            value={formData.password}
             required
             placeholder="Enter your password"
           />
         </div>
-        <button type="submit" className={styles.loginButton}>
-          Log In
+        <button
+          type="submit"
+          onClick={handleSubmit}
+          className={styles.loginButton}
+        >
+          {!isLoading && !error ? "Signing In" : "Log In"}
         </button>
         <div className={styles.forgotPassword}>
           <Link to="/pass_reset">Forgot Password?</Link>
