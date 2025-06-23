@@ -113,7 +113,7 @@ function App() {
             <Route path="tutors" element={<TutorConsultPage />} />
           </Route>
           <Route
-            path="practicetest"
+            path="/app/practicetest"
             element={
               <ProtectedRoute>
                 <PracticeTestPage />
@@ -121,7 +121,7 @@ function App() {
             }
           />
           <Route
-            path="bookmarks"
+            path="/app/bookmarks"
             element={
               <ProtectedRoute>
                 <BookmarksPage />
@@ -129,7 +129,7 @@ function App() {
             }
           />
           <Route
-            path="certificates"
+            path="/app/certificates"
             element={
               <ProtectedRoute>
                 <CertificatesPage />
@@ -137,7 +137,7 @@ function App() {
             }
           />
           <Route
-            path="downloads"
+            path="/app/downloads"
             element={
               <ProtectedRoute>
                 <DownloadsPage />
@@ -145,7 +145,7 @@ function App() {
             }
           />
           <Route
-            path="account"
+            path="/app/account"
             element={
               <ProtectedRoute>
                 <AccountPage />
@@ -153,7 +153,7 @@ function App() {
             }
           />
           <Route
-            path="preferences"
+            path="/app/preferences"
             element={
               <ProtectedRoute>
                 <PreferencesPage />
@@ -161,7 +161,7 @@ function App() {
             }
           />
           <Route
-            path="help"
+            path="/app/help"
             element={
               <ProtectedRoute>
                 <HelpPage />
