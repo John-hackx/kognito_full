@@ -9,7 +9,7 @@ const generateTokenAndSetCookie = (userId, res) => {
     path: "/",
     httpOnly: true,
     secure: process.env.NODE_ENV === "production", // Use secure cookies in production
-    sameSite: "strict", // Helps prevent CSRF attacks
+    sameSite: "none", // Helps prevent CSRF attacks
     maxAge: 15 * 24 * 60 * 60 * 1000, // 15 days in milliseconds
   });
 };
