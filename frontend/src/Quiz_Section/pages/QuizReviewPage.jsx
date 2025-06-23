@@ -11,7 +11,7 @@ function QuizReviewPage() {
   const mobileView = windowWidth <= 500;
 
   const handleBackToDashboard = () => {
-    navigate("/quizhub/home");
+    navigate("/app/quizhub/home");
   };
 
   return (
