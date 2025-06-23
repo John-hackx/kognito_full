@@ -12,10 +12,12 @@ import { RecommendedQuizCard } from "./RecommendedQuizCard";
 import { useContext } from "react";
 import { QuizzesContext } from "./QuizzesContext";
 import { WindowSizeContext } from "../../Main_App/components/WindowSizeContext";
+import useAuthStore from "../../stores/authStore";
 
 function QuizHubMain() {
   const { state, isMenuOpen } = useContext(QuizzesContext);
   const { windowWidth } = useContext(WindowSizeContext);
+  const { user } = useAuthStore();
 
   const mobileView = windowWidth <= 500;
 
@@ -28,6 +30,7 @@ function QuizHubMain() {
     width: `${mobileView ? "110%" : "100%"}`,
     border: "0px solid red",
   };
+  console.log(user);
   return (
     <>
       {isMenuOpen && <div className={styles.dimPage}></div>}
@@ -37,7 +40,7 @@ function QuizHubMain() {
             <div className={styles.hero}>
               <div className={styles.heroLeft}>
                 <h3 className={clsx(styles.heroHeader)}>
-                  Welcome Back, Emily!
+                  Welcome Back, {user.firstName}!
                 </h3>
                 <p className={clsx(styles.heroText)}>
                   Continue your learning journey and improve your skills.

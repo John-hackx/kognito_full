@@ -220,7 +220,7 @@ function QuizHubDashboard() {
           middleChildrenStyle={middleChildrenStyle}
         >
           {!mobileView && (
-            <Link to="/" className={styles.goBackLink}>
+            <Link to="/app" className={styles.goBackLink}>
               <div className={styles.goBack}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

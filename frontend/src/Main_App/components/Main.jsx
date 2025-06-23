@@ -14,9 +14,11 @@ import ProgressBar from "./ProgressBar";
 import { useContext } from "react";
 import { WindowSizeContext } from "./WindowSizeContext";
 import { DashboardContext } from "./DashboardContext";
+import useAuthStore from "../../stores/authStore";
 
 function Main({ isMenuOpen }) {
   const { windowWidth } = useContext(WindowSizeContext);
+  const { user } = useAuthStore();
   // const { dashboardState } = useContext(DashboardContext);
   const mobileView = windowWidth <= 500;
 
@@ -69,7 +71,7 @@ function Main({ isMenuOpen }) {
         <div className={clsx(styles.welcomeHero)}>
           <div className={styles.welcomeHeader}>
             <div className={clsx(styles.welcomeHeaderText)}>
-              <h3>Welcome Back, Emily!</h3>
+              <h3>Welcome Back, {user.firstName}!</h3>
               {mobileView ? (
                 <p>You're making great progress</p>
               ) : (
