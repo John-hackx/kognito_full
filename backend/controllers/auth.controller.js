@@ -89,7 +89,7 @@ export const logout = async (req, res) => {
     res.clearCookie("jwt", {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      sameSite: "none",
       maxAge: 0, // Set maxAge to 0 to clear the cookie
     });
     res.setHeader(
