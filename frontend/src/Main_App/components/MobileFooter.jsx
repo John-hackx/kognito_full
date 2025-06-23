@@ -25,7 +25,7 @@ const elements = [
       </svg>,
     ],
     text: "Dashboard",
-    link: "/",
+    link: "/app",
   },
   {
     svg: [
@@ -49,7 +49,7 @@ const elements = [
       </svg>,
     ],
     text: "Courses",
-    link: "/courses",
+    link: "/app/courses",
   },
   {
     svg: [
@@ -73,7 +73,7 @@ const elements = [
       </svg>,
     ],
     text: "Calendar",
-    link: "/calendar",
+    link: "/app/calendar",
   },
   {
     svg: [
@@ -97,7 +97,7 @@ const elements = [
       </svg>,
     ],
     text: "Profile",
-    link: "/account",
+    link: "/app/account",
   },
 ];
 
@@ -124,7 +124,7 @@ const elementsQuiz = [
       </svg>,
     ],
     text: "Home",
-    link: "/quizhub/home",
+    link: "/app/quizhub/home",
   },
   {
     svg: [
@@ -148,7 +148,7 @@ const elementsQuiz = [
       </svg>,
     ],
     text: "Quizzes",
-    link: "/quizhub/quizzes",
+    link: "/app/quizhub/quizzes",
   },
   {
     svg: [
@@ -172,7 +172,7 @@ const elementsQuiz = [
       </svg>,
     ],
     text: "Practice",
-    link: "/quizhub/practice",
+    link: "/app/quizhub/practice",
   },
   {
     svg: [
@@ -196,7 +196,7 @@ const elementsQuiz = [
       </svg>,
     ],
     text: "Tutors",
-    link: "/quizhub/tutors",
+    link: "/app/quizhub/tutors",
   },
 ];
 

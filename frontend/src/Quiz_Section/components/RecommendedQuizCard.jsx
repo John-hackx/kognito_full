@@ -24,7 +24,7 @@ export function RecommendedQuizCard({
   // const mobileView = windowWidth <= 500;
   const navigate = useNavigate();
   const handleStartQuiz = (id) => {
-    navigate(`/quizhub/quizzes/${id}`, { state: quiz });
+    navigate(`/app/quizhub/quizzes/${id}`, { state: quiz });
     // console.log(data);
   };
   return (
