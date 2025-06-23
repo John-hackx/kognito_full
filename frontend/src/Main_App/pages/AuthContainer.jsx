@@ -6,10 +6,11 @@ import vectorImage1 from "../../assets/images/review-icon.svg";
 import vectorImage2 from "../../assets/images/vectorImage1.svg";
 import clsx from "clsx";
 import { useLocation } from "react-router-dom";
-import useAuthStore from "../../stores/authStore";
+// import useAuthStore from "../../stores/authStore";
+import Loader from "../components/Loader";
 
 function AuthContainer() {
-  const { user } = useAuthStore();
+  // const { isLoading } = useAuthStore();
   const [isLogin, setIsLogin] = useState(true);
   const location = useLocation();
 
@@ -21,7 +22,7 @@ function AuthContainer() {
     }
   }, [location.state?.isLogin]);
 
-  console.log(user);
+  // console.log(isLoading);
 
   return (
     <div className={styles.authPage}>

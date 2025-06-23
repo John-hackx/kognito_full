@@ -68,6 +68,7 @@ export const login = async (req, res) => {
     }
 
     generateTokenAndSetCookie(user._id, res);
+    // console.log("User logged in: ");
     res.status(200).json({
       message: "successfully logged in",
       data: {
@@ -109,6 +110,10 @@ export const logout = async (req, res) => {
 export const getMe = async (req, res) => {
   try {
     const user = await UserModel.findById(req.user._id).select("-password");
+    if (!user) {
+      return res.status(404).json({ error: "user not found!" });
+    }
+    // console.log(user);
     res
       .status(200)
       .json({ message: "successfully got logged-in user", data: user });

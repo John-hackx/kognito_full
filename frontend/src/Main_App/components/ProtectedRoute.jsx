@@ -7,13 +7,16 @@ function ProtectedRoute({ children }) {
   const { isLoading, user, checkAuth } = useAuthStore();
 
   useEffect(() => {
-    if (!user && !isLoading) {
-      checkAuth();
-    }
+    const checkAuthentication = async () => {
+      if (!user && !isLoading) {
+        await checkAuth();
+      }
+    };
+    checkAuthentication();
   }, [checkAuth, user, isLoading]);
 
   if (isLoading) {
-    return <Loader />;
+    return <Loader isLoading={isLoading} />;
   }
 
   return user ? children : <Navigate to="/auth" replace />;

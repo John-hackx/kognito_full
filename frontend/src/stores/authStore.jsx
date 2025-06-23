@@ -26,7 +26,7 @@ const useAuthStore = create((set) => ({
       return res.data.data;
     } catch (error) {
       console.log(error);
-      set({ error: error.response.data.error });
+      set({ error: error.response.data.error, isLoading: false });
     }
   },
   logIn: async (formData) => {
@@ -40,7 +40,7 @@ const useAuthStore = create((set) => ({
       return res.data.data;
     } catch (error) {
       console.log(error.response);
-      set({ error: error.response.data.error });
+      set({ error: error.response.data.error, isLoading: false });
     }
   },
   logOut: async () => {
@@ -59,7 +59,7 @@ const useAuthStore = create((set) => ({
     }
   },
   checkAuth: async () => {
-    set({ isLoading: true, error: null });
+    // set({ error: null });
     try {
       const res = await axios.get(`${baseURL}/api/auth/me`, {
         withCredentials: true,
@@ -68,7 +68,7 @@ const useAuthStore = create((set) => ({
       return res.data?.data;
     } catch (error) {
       console.log(error.response);
-      set({ error: error.response?.data.error });
+      set({ isLoading: false });
     }
   },
 }));

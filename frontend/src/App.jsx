@@ -40,12 +40,15 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (!user && !isLoading) {
-      checkAuth();
-    }
+    const checkAuthentication = async () => {
+      if (!user && !isLoading) {
+        await checkAuth();
+      }
+    };
+    checkAuthentication();
   }, [checkAuth, user, isLoading]);
 
-  console.log(user);
+  // console.log(user);
 
   return (
     <WindowSizeContext.Provider value={{ windowWidth }}>
