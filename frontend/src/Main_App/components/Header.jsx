@@ -17,7 +17,7 @@ function Header({
   logoStyle,
   middleChildrenStyle,
 }) {
-  const { logOut, user } = useAuthStore();
+  const { logOut } = useAuthStore();
   const { windowWidth } = useContext(WindowSizeContext);
   const navigate = useNavigate();
   // const { dashboardDispatch } = useContext(DashboardContext);
@@ -34,7 +34,7 @@ function Header({
       navigate("/");
     }
   };
-  console.log(user);
+  // console.log(user);
   useEffect(
     function () {
       const handleMenuOpen = (e) => {
