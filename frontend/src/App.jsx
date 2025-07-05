@@ -18,6 +18,15 @@ import TutorConsultPage from "./Quiz_Section/pages/TutorConsultPage";
 import QuizHubDashboard from "./Quiz_Section/pages/QuizHubDashboard";
 import TakeQuizPage from "./Quiz_Section/pages/TakeQuizPage";
 import FinishQuiz from "./Quiz_Section/pages/FinishQuiz";
+//admin
+import AdminPage from "./admin/AdminPage";
+import AdminDashboard from "./admin/AdminDashboard";
+import AdminCourses from "./admin/AdminCourses";
+import AdminBlog from "./admin/AdminBlog";
+import AdminCoupons from "./admin/AdminCoupons";
+import AdminAuthentication from "./admin/AdminAuthentication";
+import AdminSettings from "./admin/AdminSettings";
+//...
 import QuizReviewPage from "./Quiz_Section/pages/QuizReviewPage";
 import { WindowSizeContext } from "./Main_App/components/WindowSizeContext";
 import { useEffect, useState } from "react";
@@ -56,6 +65,15 @@ function App() {
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/admin" element={<AdminPage />}>
+            <Route index element={<Navigate to="dashboard" replace />} />
+            <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="courses" element={<AdminCourses />} />
+            <Route path="blog" element={<AdminBlog />} />
+            <Route path="coupons" element={<AdminCoupons />} />
+            <Route path="authentication" element={<AdminAuthentication />} />
+            <Route path="settings" element={<AdminSettings />} />
+          </Route>
           <Route
             path="/auth"
             element={user ? <Navigate to="/app" replace /> : <AuthContainer />}

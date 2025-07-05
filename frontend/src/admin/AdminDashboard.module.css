@@ -1,0 +1,42 @@
+* {
+  padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  border: 0;
+}
+
+.dashboard {
+  background-color: #efefef;
+  height: 100vh;
+  width: 100vw;
+  /* border: 1px solid red; */
+}
+.dashboardContainer {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  padding: 15px;
+  display: flex;
+  border: 1px solid blue;
+  gap: 10px;
+}
+.dashboardLeft {
+  flex: 0.23;
+  /* border: 1px solid green; */
+  overflow: hidden;
+}
+.dashboardRight {
+  flex: 0.77;
+  border: 1px solid yellow;
+}
+
+.backSvg {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 1px solid #d9d9d9;
+}
