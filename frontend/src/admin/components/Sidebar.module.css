@@ -1,6 +1,6 @@
 .sidebar {
-  width: 22.4vw;
-  height: 95vh;
+  width: 19.5vw;
+  /* height: 100vh; */
   background-color: #ffffff;
   max-width: 100%;
   max-height: 100%;
@@ -8,14 +8,16 @@
   display: flex;
   flex-direction: column;
   position: fixed;
-  left: 15px;
-  bottom: 15px;
-  top: 15px;
+  left: 0;
+  bottom: 0px;
+  top: 0;
 }
 
 .sidebarTop {
   flex: 0.1;
   /* border: 1px solid black; */
+  margin-left: -15px;
+
   /* padding-top: 20px; */
 }
 .logoContainer {
@@ -26,7 +28,6 @@
 }
 .logoContainer img {
   object-fit: contain;
-  margin-left: -25px;
   width: 70%;
   height: 70%;
   /* border: 1px solid red; */

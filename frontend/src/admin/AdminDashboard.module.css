@@ -16,21 +16,23 @@
   height: 100%;
   max-width: 100%;
   max-height: 100%;
-  padding: 15px;
+  /* padding: 15px; */
   display: flex;
-  border: 1px solid blue;
-  gap: 10px;
+  /* border: 1px solid blue; */
+  /* gap: 10px; */
 }
 .dashboardLeft {
-  flex: 0.23;
+  flex: 0.2;
   /* border: 1px solid green; */
   overflow: hidden;
 }
 .dashboardRight {
-  flex: 0.77;
+  flex: 0.8;
   border: 1px solid yellow;
 }
-
+.navHeaderContainer {
+  margin-top: 13vh;
+}
 .backSvg {
   width: 45px;
   height: 45px;
@@ -39,4 +41,86 @@
   justify-content: center;
   cursor: pointer;
   border: 1px solid #d9d9d9;
+}
+
+.stats {
+  height: 200px;
+  width: 100%;
+  background-color: #ffffff;
+  margin-top: 15px;
+}
+.statsCardsContainer {
+  height: 100%;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  max-width: 100%;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.statsCard {
+  flex: 0.33;
+  height: 90%;
+  border: 1px solid #f0f0f0;
+  background-color: #ffffff;
+  border-radius: 5px;
+  padding: 10px;
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+}
+.cardTitle {
+  font-size: 18px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.8);
+}
+.cardDays {
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 500;
+  border: 1px solid #d9d9d9;
+  padding: 5px;
+}
+.cardMiddle {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.cardValue {
+  font-size: 22px;
+  font-weight: bold;
+}
+.cardSvg {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid #f0f0f0;
+  background-color: #ffffff;
+}
+
+.cardBottom {
+  display: flex;
+  gap: 20px;
+}
+.cardPercentage {
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.6);
+}
+.cardTarget {
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: bold;
 }

@@ -1,8 +1,11 @@
 .header {
   height: 11vh;
-  width: 100%;
+  width: 80%;
   max-width: 100%;
   background-color: #ffffff;
+  position: fixed;
+  top: 0;
+  right: 0;
 }
 .headerContainer {
   height: 100%;
