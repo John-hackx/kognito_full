@@ -1,10 +1,17 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useContext } from "react";
 import styles from "./Header.module.css";
 import profilePic from "../../assets/images/story-1-small.jpg";
+import { CourseContext } from "../../contexts/CourseContext";
+import clsx from "clsx";
 
 export default function Header({ children }: { children: ReactNode }) {
+  const context = useContext(CourseContext);
+
+  const showAddSectionForm = context?.showAddSectionForm;
+
   return (
     <div className={styles.header}>
+      {/* <div className={clsx(showAddSectionForm && styles.dimPage)}></div> */}
       <div className={styles.headerContainer}>
         <div className={styles.headerLeft}>{children}</div>
         <div className={styles.headerRight}>

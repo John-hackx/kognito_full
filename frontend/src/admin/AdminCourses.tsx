@@ -1,11 +1,26 @@
-import React, { act, useState } from "react";
+import React, {
+  act,
+  createContext,
+  ReactNode,
+  useContext,
+  useRef,
+  useState,
+} from "react";
 import styles from "./AdminCourses.module.css";
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import clsx from "clsx";
 import courseImage1 from "../assets/images/course-1.jpg";
+import CourseContextProvider, {
+  CourseContext,
+} from "../contexts/CourseContext";
+import thumbnailImage from "../assets/images/thumbnail.jpg";
 
 type clickFuncType = () => void;
+type EventChangeType = (
+  e: React.ChangeEvent<HTMLInputElement>,
+  id?: number
+) => void;
 
 const headerTabs: string[] = [
   "Course Details",
@@ -14,10 +29,23 @@ const headerTabs: string[] = [
   "Settings",
 ];
 
-export default function AdminCourses() {
+export default function AdminCoursesProv() {
+  return (
+    <CourseContextProvider>
+      <AdminCourses />
+    </CourseContextProvider>
+  );
+}
+
+function AdminCourses() {
   const [isCreateCourse, setIsCreateCourse] = useState<boolean>(false);
   const [isVideoCourse, setIsVideoCourse] = useState<boolean>(true);
   const [activeTab, setActiveTab] = useState<string>("Course Details");
+
+  //getting course context
+  const context = useContext(CourseContext);
+  const showAddSectionForm = context?.showAddSectionForm;
+  const setShowAddSectionForm = context?.setShowAddSectionForm;
 
   const handleCoursesBtn = () => {
     setIsCreateCourse(false);
@@ -38,9 +66,9 @@ export default function AdminCourses() {
   const handleHeaderTab = (tabName: string): void => {
     setActiveTab(tabName);
   };
-
   return (
     <div className={styles.adminCourses}>
+      <div className={clsx(showAddSectionForm && styles.dimPage)}></div>
       <div className={styles.adminCoursesContainer}>
         <div className={styles.adminCoursesLeft}>
           <Sidebar />
@@ -123,6 +151,7 @@ function CourseCard() {
           <span>
             {Array.from({ length: 4 }).map((_, i) => (
               <svg
+                key={i}
                 width="18"
                 height="18"
                 viewBox="0 0 18 18"
@@ -320,6 +349,7 @@ function CreateHeader({
     <div className={styles.createHeader}>
       {headerTabs.map((item) => (
         <p
+          key={item}
           onClick={() => handleHeaderTab(item)}
           className={clsx(activeTab === item ? styles.activeTab : "")}
         >
@@ -334,17 +364,458 @@ function VideoCourse({ activeTab }: { activeTab: string }) {
   return (
     <div className={styles.videoCourse}>
       {activeTab === "Course Details" && <VideoFormDetails />}
+      {activeTab === "Course Content" && <VideoFormContent />}
     </div>
   );
 }
 
 function VideoFormDetails() {
+  const imageInputRef = useRef<HTMLInputElement | null>(null);
+  const [imageInputText, setImageInputText] = useState<string>("Upload Image");
+  const handleImageInputChange: EventChangeType = (e) => {
+    const files = imageInputRef.current?.files;
+    setImageInputText(
+      files && files.length > 0 ? files[0].name : "Upload Image"
+    );
+    // console.log(imageInputText);
+  };
   return (
     <form method="post">
       <div className={styles.videoForm}>
-        <div className={styles.videoFormLeft}>left</div>
-        <div className={styles.videoFormRight}>right</div>
+        <div className={styles.videoFormLeft}>
+          <div className={styles.titleInput}>
+            <label htmlFor="courseTitle">Course Title:</label>
+            <input
+              type="text"
+              name="courseTitle"
+              id="courseTitle"
+              placeholder="Enter course title..."
+            />
+          </div>
+          <div className={styles.descriptionInput}>
+            <label htmlFor="courseDescription">Course Description</label>
+            <textarea
+              name="courseDescription"
+              id="courseDescription"
+              placeholder="Describe what students will learn in this course"
+            ></textarea>
+          </div>
+          <div className={styles.courseCategoryAndDifficulty}>
+            <div className={styles.courseCategory}>
+              <label htmlFor="courseCategory">Category</label>
+              <select id="courseCategory">
+                <option value="select">Select a Category</option>
+                <option value="Web Development">Web Development</option>
+                <option value="Design">Design</option>
+                <option value="Business">Business</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Music">Music</option>
+                <option value="GES">G.E.S</option>
+              </select>
+            </div>
+            <div className={styles.courseDifficulty}>
+              <label htmlFor="courseDifficulty">Difficulty</label>
+              <select id="courseDifficulty">
+                <option value="select">Select Difficulty</option>
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Advanced">Advanced</option>
+              </select>
+            </div>
+          </div>
+          <ReuseInputComp
+            title="Learning Objectives"
+            placeholder="What will students learn?"
+            btnText="Add Learning Objective"
+            btnType="objective"
+          />
+          <ReuseInputComp
+            title="Prerequisites"
+            placeholder="What should students know before enrolling?"
+            btnText="Add Prerequisite"
+            btnType="prerequisite"
+          />
+        </div>
+        <div className={styles.videoFormRight}>
+          <div className={styles.thumbnail}>
+            <p>Course Thumbnail</p>
+            <div className={styles.thumbnailInput}>
+              <img src={thumbnailImage} alt="thumbnail" />
+              <label htmlFor="thumbnail">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M11 16V7.85L8.4 10.45L7 9L12 4L17 9L15.6 10.45L13 7.85V16H11ZM6 20C5.45 20 4.97917 19.8042 4.5875 19.4125C4.19583 19.0208 4 18.55 4 18V15H6V18H18V15H20V18C20 18.55 19.8042 19.0208 19.4125 19.4125C19.0208 19.8042 18.55 20 18 20H6Z"
+                    fill="#434343"
+                  />
+                </svg>
+                {imageInputText}
+              </label>
+              <input
+                ref={imageInputRef}
+                type="file"
+                name="thumbnail"
+                id="thumbnail"
+                onChange={handleImageInputChange}
+              />
+            </div>
+          </div>
+          <div className={styles.courseDuration}>
+            <label htmlFor="duration">Course Duration (minutes)</label>
+            <input
+              type="number"
+              name="duration"
+              id="duration"
+              placeholder="Duration in minutes"
+            />
+          </div>
+        </div>
       </div>
     </form>
+  );
+}
+
+function VideoFormContent() {
+  const context = useContext(CourseContext);
+  const showAddSectionForm = context?.showAddSectionForm;
+  const setShowAddSectionForm = context?.setShowAddSectionForm;
+
+  const handleAddSectionFormBtn = () => {
+    if (setShowAddSectionForm) {
+      setShowAddSectionForm(true);
+    }
+  };
+
+  return (
+    <div className={styles.videoContent}>
+      {showAddSectionForm && <AddSectionForm />}
+      <div className={styles.videoContentHeader}>
+        <h3>Course Structure</h3>
+        <button
+          onClick={handleAddSectionFormBtn}
+          className={styles.addSectionBtn}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24px"
+            viewBox="0 -960 960 960"
+            width="24px"
+            fill="#e3e3e3"
+          >
+            <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+          </svg>
+          Add Section
+        </button>
+      </div>
+      <div className={styles.videoContentBody}>
+        <form>
+          <Section />
+          <Section />
+        </form>
+      </div>
+    </div>
+  );
+}
+
+function AddSectionForm() {
+  return (
+    <div className={styles.addSectionForm}>
+      <div className={styles.addSectionFormHeader}>
+        <p>Add New Lesson</p>
+      </div>
+      <div className={styles.addSectionFormBody}>
+        <label htmlFor="videoTitle">Video Title</label>
+        <input type="text" id="videoTitle" placeholder="Enter Video Title" />
+        <label htmlFor="videoDescription">Video Description</label>
+        <textarea
+          name="videoDescription"
+          id="videoDescription"
+          placeholder="Describe what this video covers..."
+        ></textarea>
+      </div>
+    </div>
+  );
+}
+
+function Section() {
+  return (
+    <div className={styles.section}>
+      <div className={styles.sectionTop}>
+        <div className={styles.sectionTopLeft}>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M9 20C8.45 20 7.97917 19.8042 7.5875 19.4125C7.19583 19.0208 7 18.55 7 18C7 17.45 7.19583 16.9792 7.5875 16.5875C7.97917 16.1958 8.45 16 9 16C9.55 16 10.0208 16.1958 10.4125 16.5875C10.8042 16.9792 11 17.45 11 18C11 18.55 10.8042 19.0208 10.4125 19.4125C10.0208 19.8042 9.55 20 9 20ZM15 20C14.45 20 13.9792 19.8042 13.5875 19.4125C13.1958 19.0208 13 18.55 13 18C13 17.45 13.1958 16.9792 13.5875 16.5875C13.9792 16.1958 14.45 16 15 16C15.55 16 16.0208 16.1958 16.4125 16.5875C16.8042 16.9792 17 17.45 17 18C17 18.55 16.8042 19.0208 16.4125 19.4125C16.0208 19.8042 15.55 20 15 20ZM9 14C8.45 14 7.97917 13.8042 7.5875 13.4125C7.19583 13.0208 7 12.55 7 12C7 11.45 7.19583 10.9792 7.5875 10.5875C7.97917 10.1958 8.45 10 9 10C9.55 10 10.0208 10.1958 10.4125 10.5875C10.8042 10.9792 11 11.45 11 12C11 12.55 10.8042 13.0208 10.4125 13.4125C10.0208 13.8042 9.55 14 9 14ZM15 14C14.45 14 13.9792 13.8042 13.5875 13.4125C13.1958 13.0208 13 12.55 13 12C13 11.45 13.1958 10.9792 13.5875 10.5875C13.9792 10.1958 14.45 10 15 10C15.55 10 16.0208 10.1958 16.4125 10.5875C16.8042 10.9792 17 11.45 17 12C17 12.55 16.8042 13.0208 16.4125 13.4125C16.0208 13.8042 15.55 14 15 14ZM9 8C8.45 8 7.97917 7.80417 7.5875 7.4125C7.19583 7.02083 7 6.55 7 6C7 5.45 7.19583 4.97917 7.5875 4.5875C7.97917 4.19583 8.45 4 9 4C9.55 4 10.0208 4.19583 10.4125 4.5875C10.8042 4.97917 11 5.45 11 6C11 6.55 10.8042 7.02083 10.4125 7.4125C10.0208 7.80417 9.55 8 9 8ZM15 8C14.45 8 13.9792 7.80417 13.5875 7.4125C13.1958 7.02083 13 6.55 13 6C13 5.45 13.1958 4.97917 13.5875 4.5875C13.9792 4.19583 14.45 4 15 4C15.55 4 16.0208 4.19583 16.4125 4.5875C16.8042 4.97917 17 5.45 17 6C17 6.55 16.8042 7.02083 16.4125 7.4125C16.0208 7.80417 15.55 8 15 8Z"
+              fill="#434343"
+            />
+          </svg>
+          <p>Section 1: Introduction</p>
+        </div>
+        <div className={styles.sectionTopRight}>
+          <svg
+            className={styles.headerEditSvg}
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M5 21C4.45 21 3.97917 20.8041 3.5875 20.4125C3.19583 20.0208 3 19.55 3 19V4.99998C3 4.44998 3.19583 3.97914 3.5875 3.58748C3.97917 3.19581 4.45 2.99998 5 2.99998H13.925L11.925 4.99998H5V19H19V12.05L21 10.05V19C21 19.55 20.8042 20.0208 20.4125 20.4125C20.0208 20.8041 19.55 21 19 21H5ZM9 15V10.75L18.175 1.57498C18.375 1.37498 18.6 1.22498 18.85 1.12498C19.1 1.02498 19.35 0.974976 19.6 0.974976C19.8667 0.974976 20.1208 1.02498 20.3625 1.12498C20.6042 1.22498 20.825 1.37498 21.025 1.57498L22.425 2.99998C22.6083 3.19998 22.75 3.42081 22.85 3.66248C22.95 3.90414 23 4.14998 23 4.39998C23 4.64998 22.9542 4.89581 22.8625 5.13748C22.7708 5.37914 22.625 5.59998 22.425 5.79998L13.25 15H9ZM11 13H12.4L18.2 7.19998L17.5 6.49998L16.775 5.79998L11 11.575V13Z"
+              fill="#434343"
+            />
+          </svg>
+          <svg
+            className={styles.headerDeleteSvg}
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M7 21C6.45 21 5.97917 20.8042 5.5875 20.4125C5.19583 20.0208 5 19.55 5 19V6H4V4H9V3H15V4H20V6H19V19C19 19.55 18.8042 20.0208 18.4125 20.4125C18.0208 20.8042 17.55 21 17 21H7ZM17 6H7V19H17V6ZM9 17H11V8H9V17ZM13 17H15V8H13V17Z"
+              fill="#434343"
+            />
+          </svg>
+          <svg
+            className={styles.headerDropDownSvg}
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12 15.4L6 9.4L7.4 8L12 12.6L16.6 8L18 9.4L12 15.4Z"
+              fill="#434343"
+            />
+          </svg>
+        </div>
+      </div>
+      <div className={styles.sectionMiddle}>
+        <Lesson />
+        <Lesson />
+      </div>
+      <div className={styles.sectionBottom}>
+        <p>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M11 13H5V11H11V5H13V11H19V13H13V19H11V13Z"
+              fill="#535AE5"
+            />
+          </svg>
+          Add Lesson
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function Lesson() {
+  return (
+    <div className={styles.lesson}>
+      <div className={styles.lessonLeft}>
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M9 20C8.45 20 7.97917 19.8042 7.5875 19.4125C7.19583 19.0208 7 18.55 7 18C7 17.45 7.19583 16.9792 7.5875 16.5875C7.97917 16.1958 8.45 16 9 16C9.55 16 10.0208 16.1958 10.4125 16.5875C10.8042 16.9792 11 17.45 11 18C11 18.55 10.8042 19.0208 10.4125 19.4125C10.0208 19.8042 9.55 20 9 20ZM15 20C14.45 20 13.9792 19.8042 13.5875 19.4125C13.1958 19.0208 13 18.55 13 18C13 17.45 13.1958 16.9792 13.5875 16.5875C13.9792 16.1958 14.45 16 15 16C15.55 16 16.0208 16.1958 16.4125 16.5875C16.8042 16.9792 17 17.45 17 18C17 18.55 16.8042 19.0208 16.4125 19.4125C16.0208 19.8042 15.55 20 15 20ZM9 14C8.45 14 7.97917 13.8042 7.5875 13.4125C7.19583 13.0208 7 12.55 7 12C7 11.45 7.19583 10.9792 7.5875 10.5875C7.97917 10.1958 8.45 10 9 10C9.55 10 10.0208 10.1958 10.4125 10.5875C10.8042 10.9792 11 11.45 11 12C11 12.55 10.8042 13.0208 10.4125 13.4125C10.0208 13.8042 9.55 14 9 14ZM15 14C14.45 14 13.9792 13.8042 13.5875 13.4125C13.1958 13.0208 13 12.55 13 12C13 11.45 13.1958 10.9792 13.5875 10.5875C13.9792 10.1958 14.45 10 15 10C15.55 10 16.0208 10.1958 16.4125 10.5875C16.8042 10.9792 17 11.45 17 12C17 12.55 16.8042 13.0208 16.4125 13.4125C16.0208 13.8042 15.55 14 15 14ZM9 8C8.45 8 7.97917 7.80417 7.5875 7.4125C7.19583 7.02083 7 6.55 7 6C7 5.45 7.19583 4.97917 7.5875 4.5875C7.97917 4.19583 8.45 4 9 4C9.55 4 10.0208 4.19583 10.4125 4.5875C10.8042 4.97917 11 5.45 11 6C11 6.55 10.8042 7.02083 10.4125 7.4125C10.0208 7.80417 9.55 8 9 8ZM15 8C14.45 8 13.9792 7.80417 13.5875 7.4125C13.1958 7.02083 13 6.55 13 6C13 5.45 13.1958 4.97917 13.5875 4.5875C13.9792 4.19583 14.45 4 15 4C15.55 4 16.0208 4.19583 16.4125 4.5875C16.8042 4.97917 17 5.45 17 6C17 6.55 16.8042 7.02083 16.4125 7.4125C16.0208 7.80417 15.55 8 15 8Z"
+            fill="#9D9D9D"
+          />
+        </svg>
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M4 20C3.45 20 2.97917 19.8042 2.5875 19.4125C2.19583 19.0208 2 18.55 2 18V6C2 5.45 2.19583 4.97917 2.5875 4.5875C2.97917 4.19583 3.45 4 4 4H16C16.55 4 17.0208 4.19583 17.4125 4.5875C17.8042 4.97917 18 5.45 18 6V10.5L22 6.5V17.5L18 13.5V18C18 18.55 17.8042 19.0208 17.4125 19.4125C17.0208 19.8042 16.55 20 16 20H4Z"
+            fill="#1680D7"
+          />
+        </svg>
+        <p>Welcome to the Course</p>
+      </div>
+      <div className={styles.lessonRight}>
+        <p>5:30</p>
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M5 21C4.45 21 3.97917 20.8041 3.5875 20.4125C3.19583 20.0208 3 19.55 3 19V4.99998C3 4.44998 3.19583 3.97914 3.5875 3.58748C3.97917 3.19581 4.45 2.99998 5 2.99998H13.925L11.925 4.99998H5V19H19V12.05L21 10.05V19C21 19.55 20.8042 20.0208 20.4125 20.4125C20.0208 20.8041 19.55 21 19 21H5ZM9 15V10.75L18.175 1.57498C18.375 1.37498 18.6 1.22498 18.85 1.12498C19.1 1.02498 19.35 0.974976 19.6 0.974976C19.8667 0.974976 20.1208 1.02498 20.3625 1.12498C20.6042 1.22498 20.825 1.37498 21.025 1.57498L22.425 2.99998C22.6083 3.19998 22.75 3.42081 22.85 3.66248C22.95 3.90414 23 4.14998 23 4.39998C23 4.64998 22.9542 4.89581 22.8625 5.13748C22.7708 5.37914 22.625 5.59998 22.425 5.79998L13.25 15H9ZM11 13H12.4L18.2 7.19998L17.5 6.49998L16.775 5.79998L11 11.575V13Z"
+            fill="#434343"
+          />
+        </svg>
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M7 21C6.45 21 5.97917 20.8042 5.5875 20.4125C5.19583 20.0208 5 19.55 5 19V6H4V4H9V3H15V4H20V6H19V19C19 19.55 18.8042 20.0208 18.4125 20.4125C18.0208 20.8042 17.55 21 17 21H7ZM17 6H7V19H17V6ZM9 17H11V8H9V17ZM13 17H15V8H13V17Z"
+            fill="#434343"
+          />
+        </svg>
+      </div>
+    </div>
+  );
+}
+
+function ReuseInputComp({
+  title,
+  placeholder,
+  btnText,
+  btnType,
+}: {
+  title: string;
+  placeholder: string;
+  btnText: string;
+  btnType: string;
+}) {
+  const courseContext = useContext(CourseContext);
+  const objectives = courseContext?.objectives;
+  const setObjectives = courseContext?.setObjectives;
+  const prerequisites = courseContext?.prerequisites;
+  const setPrerequisites = courseContext?.setPrerequisites;
+
+  // console.log(objectives);
+
+  const handleObjectiveInput: EventChangeType = (e, id) => {
+    if (setObjectives && typeof id === "number") {
+      let updatedObjectives = (objectives ?? []).map((item) =>
+        item.id === id ? { ...item, value: e.target.value } : item
+      );
+
+      setObjectives(updatedObjectives);
+      // console.log(typeof id);
+    }
+  };
+  // console.log(objectives);
+
+  const handlePrerequisiteInput: EventChangeType = (e, id) => {
+    if (setPrerequisites && typeof id === "number") {
+      let updatedPrerequisites = (prerequisites ?? []).map((item) =>
+        item.id === id ? { ...item, value: e.target.value } : item
+      );
+
+      setPrerequisites(updatedPrerequisites);
+      // console.log(typeof id);
+    }
+  };
+  // console.log(prerequisites);
+
+  const handleAddObjective: clickFuncType = () => {
+    if (setObjectives) {
+      setObjectives((currentObjectives) => [
+        ...currentObjectives,
+        { id: currentObjectives.length + 1, value: "" },
+      ]);
+    }
+  };
+
+  const handleAddPrerequisite: clickFuncType = () => {
+    if (setPrerequisites) {
+      setPrerequisites((currentPrerequisites) => [
+        ...currentPrerequisites,
+        { id: currentPrerequisites.length + 1, value: "" },
+      ]);
+    }
+  };
+
+  return (
+    <div className={styles.courseObjectives}>
+      <p>{title}</p>
+      {btnType === "objective" &&
+        objectives?.map((item) => (
+          <div key={item.id} className={styles.courseObjectivesInput}>
+            <input
+              onChange={(e) => handleObjectiveInput(e, item.id)}
+              type="text"
+              name="courseObjective"
+              id="courseObjective"
+              value={item.value}
+              placeholder={placeholder}
+            />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#e3e3e3"
+            >
+              <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+            </svg>
+          </div>
+        ))}
+      {btnType === "prerequisite" &&
+        prerequisites?.map((item) => (
+          <div key={item.id} className={styles.courseObjectivesInput}>
+            <input
+              type="text"
+              onChange={(e) => handlePrerequisiteInput(e, item.id)}
+              name="courseObjective"
+              id="courseObjective"
+              value={item.value}
+              placeholder={placeholder}
+            />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#e3e3e3"
+            >
+              <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+            </svg>
+          </div>
+        ))}
+      <p
+        className={styles.addObjectiveBtn}
+        onClick={
+          btnType === "objective" ? handleAddObjective : handleAddPrerequisite
+        }
+      >
+        <span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24px"
+            viewBox="0 -960 960 960"
+            width="24px"
+            fill="currentColor"
+          >
+            <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+          </svg>
+        </span>{" "}
+        {btnText}
+      </p>
+    </div>
   );
 }

@@ -86,3 +86,13 @@ a .active {
   color: blue;
   font-weight: 600;
 }
+
+/*----------Dim page--------------*/
+.dimPage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+}

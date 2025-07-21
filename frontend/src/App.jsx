@@ -35,6 +35,7 @@ import LandingPage from "./Main_App/pages/LandingPage";
 import AuthContainer from "./Main_App/pages/AuthContainer";
 import useAuthStore from "./stores/authStore";
 import ProtectedRoute from "./Main_App/components/ProtectedRoute";
+import AdminCoursesProv from "./admin/AdminCourses";
 function App() {
   const [windowWidth, setWindowWidth] = useState(() => window.innerWidth);
   const { user, isLoading, checkAuth } = useAuthStore();
@@ -68,7 +69,7 @@ function App() {
           <Route path="/admin" element={<AdminPage />}>
             <Route index element={<Navigate to="dashboard" replace />} />
             <Route path="dashboard" element={<AdminDashboard />} />
-            <Route path="courses" element={<AdminCourses />} />
+            <Route path="courses" element={<AdminCoursesProv />} />
             <Route path="blog" element={<AdminBlog />} />
             <Route path="coupons" element={<AdminCoupons />} />
             <Route path="authentication" element={<AdminAuthentication />} />

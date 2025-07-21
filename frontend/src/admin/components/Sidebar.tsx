@@ -1,7 +1,9 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useContext } from "react";
 import styles from "./Sidebar.module.css";
 import logo from "../../assets/images/logo2.jpg";
 import { Link } from "react-router-dom";
+import clsx from "clsx";
+import { CourseContext } from "../../contexts/CourseContext";
 
 type Categories = {
   svg: ReactNode;
@@ -121,8 +123,14 @@ const categories: Categories[] = [
 ];
 
 export default function Sidebar() {
+  const context = useContext(CourseContext);
+  const showAddSectionForm = context?.showAddSectionForm;
+
+  console.log(showAddSectionForm);
+
   return (
-    <div className={styles.sidebar}>
+    <div className={clsx(styles.sidebar)}>
+      {/* <div className={clsx(showAddSectionForm && styles.dimPage)}></div> */}
       <div className={styles.sidebarTop}>
         <div className={styles.logoContainer}>
           <img src={logo} alt="logo" />
@@ -131,7 +139,7 @@ export default function Sidebar() {
       <div className={styles.sidebarBottom}>
         <div className={styles.categoryContainer}>
           {categories.map((item) => (
-            <Link to={item.link}>
+            <Link key={item.link} to={item.link}>
               <CategoryItem text={item.text} svgCode={item.svg} />
             </Link>
           ))}

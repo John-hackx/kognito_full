@@ -7,7 +7,7 @@
 
 .adminCourses {
   background-color: #efefef;
-  height: 220vh;
+  height: auto;
   width: 99.2vw;
   /* border: 1px solid red; */
 }
@@ -186,17 +186,17 @@
   color: rgba(0, 0, 0, 0.7);
 }
 
-/* create course section */
+/* create course section---------------------------------------------- */
 
 .createCourse {
-  border: 1px solid red;
+  /* border: 1px solid red; */
   margin-top: 13vh;
   height: 180vh;
 }
 .createCourseHeader {
   display: flex;
   height: 13vh;
-  border: 1px solid green;
+  /* border: 1px solid green; */
 }
 .createCourseHeaderLeft {
   flex: 0.5;
@@ -293,6 +293,9 @@
   padding: 20px;
   gap: 10px;
 }
+.typeLeft:hover {
+  cursor: pointer;
+}
 .typeRight {
   padding: 20px;
   display: flex;
@@ -300,6 +303,9 @@
   border: 1px solid #d9d9d9;
   border-radius: 10px;
   gap: 10px;
+}
+.typeRight:hover {
+  cursor: pointer;
 }
 .indicatorBody {
   flex: 0.1;
@@ -349,31 +355,38 @@
 
 .createCourseBody {
   margin-top: 20px;
-  height: 80vh;
+  height: auto;
+  padding-bottom: 30px;
   background-color: #ffffff;
   width: 99%;
   display: flex;
   flex-direction: column;
+  border-radius: 8px;
 }
 
 .createHeader {
   display: flex;
-  flex: 0.1;
+  /* flex: 0.1; */
+  height: 8vh;
   border-bottom: 1px solid #d9d9d9;
   gap: 15px;
   align-items: center;
-  padding-left: 20px;
+  /* padding-left: 20px; */
 }
 .createHeader p {
   font-size: 15px;
   color: rgba(0, 0, 0, 0.7);
+  height: 100%;
+  text-align: center;
+  padding-top: 13px;
+  width: 10vw;
 }
 .createHeader p:hover {
   cursor: pointer;
 }
 .activeTab {
-  padding: 5px;
-  border-bottom: 1px solid #0965b1;
+  /* padding: 5px; */
+  border-bottom: 2px solid #0965b1;
   border-bottom-left-radius: 5px;
   color: #0965b1;
   border-bottom-right-radius: 5px;
@@ -381,7 +394,7 @@
 
 .videoCourse {
   flex: 0.9;
-  border: 1px solid green;
+  /* border: 1px solid green; */
 }
 
 .videoForm {
@@ -392,14 +405,362 @@
   display: flex;
   gap: 20px;
   /* border: 1px solid yellow; */
+  padding: 10px;
 }
 .videoFormLeft {
-  border: 1px solid black;
-  flex: 0.7;
+  /* border: 1px solid black; */
+  flex: 0.65;
   display: flex;
   flex-direction: column;
 }
+
+.titleInput {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-left: 10px;
+  margin-top: 20px;
+}
+.titleInput label {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.7);
+}
+.titleInput input {
+  outline: none;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.descriptionInput {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-left: 10px;
+  margin-top: 20px;
+}
+.descriptionInput label {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.7);
+}
+.descriptionInput textarea {
+  outline: none;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.8);
+  height: 20vh;
+}
+.courseCategoryAndDifficulty {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+.courseCategory {
+  flex: 0.5;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-left: 10px;
+}
+.courseCategory label {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.7);
+}
+.courseCategory select {
+  outline: none;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  background-color: #ffffff;
+  width: 100%;
+  padding: 10px;
+  /* padding-right: 10px; */
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.courseDifficulty {
+  flex: 0.5;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.courseDifficulty label {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.courseDifficulty select {
+  outline: none;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  background-color: #ffffff;
+  width: 100%;
+  padding: 10px;
+  /* padding-right: 10px; */
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.courseObjectives {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-left: 10px;
+  margin-top: 20px;
+}
+.courseObjectives p {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.7);
+}
+.courseObjectivesInput {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+}
+.courseObjectivesInput input {
+  outline: none;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.8);
+}
+.courseObjectivesInput input:focus {
+  box-shadow: rgba(11, 142, 250, 0.2) 0px 2px 8px 0px;
+  border: 1px solid #535ae5;
+}
+.addObjectiveBtn {
+  width: 20vw;
+  /* background-color: none; */
+  /* border: none; */
+  color: #0965b1 !important;
+  display: flex;
+  align-items: center;
+}
+.addObjectiveBtn:hover {
+  cursor: pointer;
+}
+
 .videoFormRight {
-  flex: 0.3;
-  border: 1px solid blue;
+  display: flex;
+  flex-direction: column;
+  flex: 0.35;
+  /* border: 1px solid blue; */
+  padding: 20px;
+}
+
+.thumbnail {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.thumbnail p {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.7);
+}
+.thumbnailInput {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+  height: 49vh;
+  width: 100%;
+  border: 2px dashed #d9d9d9;
+  border-radius: 8px;
+}
+.thumbnailInput img {
+  height: 80%;
+  width: 100%;
+  object-fit: contain;
+}
+.thumbnailInput label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 5px;
+  background-color: #d9d9d9;
+  border-radius: 5px;
+  font-size: 14px;
+}
+.thumbnailInput label:hover {
+  cursor: pointer;
+}
+.thumbnailInput input {
+  display: none;
+}
+.courseDuration {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.courseDuration label {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.7);
+}
+.courseDuration input {
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  font-size: 15px !important;
+  padding: 10px;
+  outline: none;
+}
+
+/*----------- video form content *-----------------*/
+
+.videoContent {
+  height: 100vh;
+  width: 100%;
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+  overflow: hidden;
+  gap: 15px;
+}
+
+.videoContentHeader {
+  height: 10vh;
+  width: 100%;
+  /* border: 1px solid green; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.videoContentHeader h3 {
+  font-weight: 500;
+  font-size: 18px;
+  color: rgba(0, 0, 0, 0.8);
+}
+.addSectionBtn {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #535ae5;
+  font-size: 15px;
+  color: #ffffff;
+  gap: 3px;
+  height: fit-content;
+  border-radius: 5px;
+}
+.addSectionBtn:hover {
+  cursor: pointer;
+  background-color: #4349d4;
+}
+
+/* .videoContentBody {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+} */
+.videoContentBody form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.section {
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+.sectionTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 8vh;
+  padding: 10px;
+  background-color: #f3f4f6;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom: 1px solid #d9d9d9;
+}
+.sectionTopLeft {
+  display: flex;
+  gap: 10px;
+}
+.sectionTopLeft p {
+  font-size: 17px;
+  color: rgba(0, 0, 0, 0.8);
+}
+.sectionTopRight {
+  display: flex;
+  gap: 3px;
+}
+.sectionTopRight:hover {
+  cursor: pointer;
+}
+
+.sectionMiddle {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 10px;
+}
+
+.lesson {
+  display: flex;
+  height: 8vh;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  justify-content: space-between;
+  align-items: center;
+}
+.lessonLeft {
+  display: flex;
+  align-items: center;
+}
+.lessonLeft p {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.8);
+  margin-left: 10px;
+}
+.lessonRight {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.lessonRight p {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.sectionBottom {
+  padding: 10px;
+}
+.sectionBottom p {
+  display: flex;
+  align-items: center;
+  color: #0965b1;
+  font-size: 15px;
+}
+.sectionBottom p:hover {
+  cursor: pointer;
+  color: #2b31a1;
+}
+
+.dimPage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1;
 }
