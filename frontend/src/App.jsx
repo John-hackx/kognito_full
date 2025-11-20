@@ -36,6 +36,7 @@ import AuthContainer from "./Main_App/pages/AuthContainer";
 import useAuthStore from "./stores/authStore";
 import ProtectedRoute from "./Main_App/components/ProtectedRoute";
 import AdminCoursesProv from "./admin/AdminCourses";
+import VerifyOTPPage from "./Main_App/components/VerifyOtp";
 function App() {
   const [windowWidth, setWindowWidth] = useState(() => window.innerWidth);
   const { user, isLoading, checkAuth } = useAuthStore();
@@ -79,6 +80,7 @@ function App() {
             path="/auth"
             element={user ? <Navigate to="/app" replace /> : <AuthContainer />}
           />
+          <Route path="/auth/verify/:id" element={<VerifyOTPPage />} />
           <Route
             path="/app"
             element={

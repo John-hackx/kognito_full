@@ -6,15 +6,18 @@ import React, {
   useRef,
   useState,
 } from "react";
+import instructorImage from "../assets/images/instructor02.jpg";
 import styles from "./AdminCourses.module.css";
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import clsx from "clsx";
 import courseImage1 from "../assets/images/course-1.jpg";
+import useCourseStore from "../stores/courseStore";
 import CourseContextProvider, {
   CourseContext,
 } from "../contexts/CourseContext";
 import thumbnailImage from "../assets/images/thumbnail.jpg";
+import { log } from "console";
 
 type clickFuncType = () => void;
 type EventChangeType = (
@@ -44,7 +47,9 @@ function AdminCourses() {
 
   //getting course context
   const context = useContext(CourseContext);
+  const courseForm = context?.courseForm;
   const showAddSectionForm = context?.showAddSectionForm;
+  const showAddLessonForm = context?.showAddLessonForm;
   const setShowAddSectionForm = context?.setShowAddSectionForm;
 
   const handleCoursesBtn = () => {
@@ -66,9 +71,12 @@ function AdminCourses() {
   const handleHeaderTab = (tabName: string): void => {
     setActiveTab(tabName);
   };
+  // console.log(courseForm);
+
   return (
     <div className={styles.adminCourses}>
       <div className={clsx(showAddSectionForm && styles.dimPage)}></div>
+      <div className={clsx(showAddLessonForm && styles.dimPage)}></div>
       <div className={styles.adminCoursesContainer}>
         <div className={styles.adminCoursesLeft}>
           <Sidebar />
@@ -220,6 +228,58 @@ function CreateCourse({
   handleReadingType: clickFuncType;
   handleVideoType: clickFuncType;
 }) {
+  const { uploadCourse, getSignedUrl } = useCourseStore();
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [signedUrl, setSignedUrl] = useState<string | null>(null);
+  const context = useContext(CourseContext);
+  const courseForm = context?.courseForm;
+
+  const handlePublishCourse = async () => {
+    if (courseForm) {
+      const res = await uploadCourse(courseForm, setUploadProgress);
+      console.log("published");
+    }
+  };
+
+  const handleSaveDraft = async () => {
+    const publicId =
+      courseForm?.courseSections[0].lessons[0].lessonFileUrl.public_id;
+    if (publicId) {
+      const res = await getSignedUrl(publicId, "video");
+      setSignedUrl(res);
+      // console.log(signedUrl);
+
+      if (res) {
+        window.open(res, "_blank");
+      } else {
+        console.warn("signedUrl is null, cannot open window.");
+      }
+    } else {
+      console.warn("publicId is undefined, cannot get signed URL.");
+    }
+  };
+
+  //checking if all forms filled
+  const isFormFilled =
+    courseForm?.courseTitle &&
+    courseForm?.courseDescription &&
+    courseForm?.courseCategory &&
+    courseForm?.courseDifficulty &&
+    courseForm?.duration > 0 &&
+    courseForm?.instructorDisplayName &&
+    courseForm?.instructorBio &&
+    courseForm?.courseSections.length > 0 &&
+    courseForm?.metaTitle &&
+    courseForm?.metaDescription &&
+    courseForm?.visibility &&
+    courseForm?.courseImage &&
+    courseForm?.objectives.length > 0 &&
+    courseForm?.prerequisites.length > 0
+      ? true
+      : false;
+
+  // console.log(isFormFilled);
+
   return (
     <div className={styles.createCourse}>
       <div className={styles.createCourseHeader}>
@@ -243,7 +303,7 @@ function CreateCourse({
             </svg>
             <span>Preview</span>
           </button>
-          <button className={styles.saveDraftBtn}>
+          <button onClick={handleSaveDraft} className={styles.saveDraftBtn}>
             <svg
               width="24"
               height="24"
@@ -258,7 +318,15 @@ function CreateCourse({
             </svg>
             <span>Save Draft</span>
           </button>
-          <button className={styles.publishBtn}>
+          <button
+            style={{
+              opacity: isFormFilled ? 1 : 0.6,
+              pointerEvents: isFormFilled ? "auto" : "none",
+              cursor: isFormFilled ? "pointer" : "not-allowed",
+            }}
+            onClick={handlePublishCourse}
+            className={styles.publishBtn}
+          >
             <svg
               width="24"
               height="24"
@@ -365,6 +433,116 @@ function VideoCourse({ activeTab }: { activeTab: string }) {
     <div className={styles.videoCourse}>
       {activeTab === "Course Details" && <VideoFormDetails />}
       {activeTab === "Course Content" && <VideoFormContent />}
+      {activeTab === "Settings" && <CourseFormSettings />}
+    </div>
+  );
+}
+
+function CourseFormSettings() {
+  const context = useContext(CourseContext);
+  const courseForm = context?.courseForm;
+  const setCourseForm = context?.setCourseForm;
+
+  const handleFormInput = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = e.target as HTMLInputElement;
+    if (setCourseForm) {
+      setCourseForm((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
+  };
+  return (
+    <div className={clsx(styles.courseSettings)}>
+      <div className={clsx(styles.courseSettingsLeft)}>
+        <div className={styles.seoFormTitle}>
+          <h3>SEO Settings</h3>
+        </div>
+        <div className={clsx(styles.seoFormBody)}>
+          <form method="post">
+            <div className={styles.metaTitleInput}>
+              <label htmlFor="metaTitle">Meta Title</label>
+              <input
+                onChange={handleFormInput}
+                type="text"
+                id="metaTitle"
+                name="metaTitle"
+                value={courseForm?.metaTitle}
+                placeholder="SEO title for your course"
+              />
+            </div>
+            <div className={styles.metaDescriptionInput}>
+              <label htmlFor="metaDescription">Meta Description</label>
+              <textarea
+                onChange={handleFormInput}
+                name="metaDescription"
+                id="metaDescription"
+                value={courseForm?.metaDescription}
+                placeholder="Brief description for search engines"
+              ></textarea>
+            </div>
+          </form>
+        </div>
+        <div className={styles.visibilityTitle}>
+          <h3>Course Visibility</h3>
+          <p>Control who can see and enroll in your course</p>
+        </div>
+        <div className={styles.visibilityInput}>
+          <select
+            name="visibility"
+            id="visibility"
+            onChange={handleFormInput}
+            value={courseForm?.visibility}
+          >
+            <option value="public">Published (Public)</option>
+            <option value="members">Members Only</option>
+          </select>
+        </div>
+      </div>
+      <div className={clsx(styles.courseSettingsRight)}>
+        <div className={styles.instructorInformationTitle}>
+          <h3>Instructor Information</h3>
+        </div>
+        <div className={clsx(styles.instructorInformationBody)}>
+          <div className={clsx(styles.instructorProfile)}>
+            <div className={clsx(styles.instructorProfileLeft)}>
+              <img src={instructorImage} alt="instructorImage" />
+            </div>
+            <div className={clsx(styles.instructorProfileRight)}>
+              <h2>John Doe</h2>
+              <p>Senior Instructor</p>
+            </div>
+          </div>
+          <div className={styles.instructorForm}>
+            <form method="post">
+              <div className={styles.displayNameInput}>
+                <label htmlFor="displayName">Display Name</label>
+                <input
+                  type="text"
+                  placeholder="Name to display on course"
+                  name="instructorDisplayName"
+                  onChange={handleFormInput}
+                  value={courseForm?.instructorDisplayName}
+                />
+              </div>
+              <div className={styles.bioForCourseInput}>
+                <label htmlFor="bioForCourse">Bio for this Course</label>
+                <textarea
+                  name="instructorBio"
+                  value={courseForm?.instructorBio}
+                  onChange={handleFormInput}
+                  id="bioForCourse"
+                  placeholder="Your Expertise in this Course"
+                ></textarea>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -372,13 +550,38 @@ function VideoCourse({ activeTab }: { activeTab: string }) {
 function VideoFormDetails() {
   const imageInputRef = useRef<HTMLInputElement | null>(null);
   const [imageInputText, setImageInputText] = useState<string>("Upload Image");
-  const handleImageInputChange: EventChangeType = (e) => {
+  const context = useContext(CourseContext);
+  const courseForm = context?.courseForm;
+  const setCourseForm = context?.setCourseForm;
+  // const handleImageInputChange: EventChangeType = (e) => {
+  //   const files = imageInputRef.current?.files;
+  //   setImageInputText(
+  //     files && files.length > 0 ? files[0].name : "Upload Image"
+  //   );
+  // };
+  const handleOnChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     const files = imageInputRef.current?.files;
     setImageInputText(
       files && files.length > 0 ? files[0].name : "Upload Image"
     );
-    // console.log(imageInputText);
+    if (setCourseForm) {
+      const { name, value, type, files } = e.target as HTMLInputElement;
+      setCourseForm((prev) => ({
+        ...prev,
+        [name]:
+          type === "file"
+            ? files && files.length > 0
+              ? files[0]
+              : null
+            : value,
+      }));
+    }
   };
+  // console.log(courseForm);
   return (
     <form method="post">
       <div className={styles.videoForm}>
@@ -390,32 +593,49 @@ function VideoFormDetails() {
               name="courseTitle"
               id="courseTitle"
               placeholder="Enter course title..."
+              value={courseForm?.courseTitle}
+              onChange={handleOnChange}
             />
           </div>
           <div className={styles.descriptionInput}>
             <label htmlFor="courseDescription">Course Description</label>
             <textarea
               name="courseDescription"
+              value={courseForm?.courseDescription}
               id="courseDescription"
               placeholder="Describe what students will learn in this course"
+              onChange={handleOnChange}
             ></textarea>
           </div>
           <div className={styles.courseCategoryAndDifficulty}>
             <div className={styles.courseCategory}>
               <label htmlFor="courseCategory">Category</label>
-              <select id="courseCategory">
+              <select
+                id="courseCategory"
+                name="courseCategory"
+                onChange={handleOnChange}
+                value={courseForm?.courseCategory}
+              >
                 <option value="select">Select a Category</option>
-                <option value="Web Development">Web Development</option>
-                <option value="Design">Design</option>
-                <option value="Business">Business</option>
-                <option value="Marketing">Marketing</option>
+                <option value="Software Development">
+                  Software Development
+                </option>
+                <option value="Design & Graphics">Design</option>
+                <option value="Business & Marketing">
+                  Business & Marketing
+                </option>
                 <option value="Music">Music</option>
-                <option value="GES">G.E.S</option>
+                <option value="G.E.S.">G.E.S.</option>
               </select>
             </div>
             <div className={styles.courseDifficulty}>
               <label htmlFor="courseDifficulty">Difficulty</label>
-              <select id="courseDifficulty">
+              <select
+                id="courseDifficulty"
+                name="courseDifficulty"
+                onChange={handleOnChange}
+                value={courseForm?.courseDifficulty}
+              >
                 <option value="select">Select Difficulty</option>
                 <option value="Beginner">Beginner</option>
                 <option value="Intermediate">Intermediate</option>
@@ -459,9 +679,10 @@ function VideoFormDetails() {
               <input
                 ref={imageInputRef}
                 type="file"
-                name="thumbnail"
+                accept="image/*"
+                name="courseImage"
                 id="thumbnail"
-                onChange={handleImageInputChange}
+                onChange={handleOnChange}
               />
             </div>
           </div>
@@ -472,6 +693,7 @@ function VideoFormDetails() {
               name="duration"
               id="duration"
               placeholder="Duration in minutes"
+              onChange={handleOnChange}
             />
           </div>
         </div>
@@ -482,22 +704,35 @@ function VideoFormDetails() {
 
 function VideoFormContent() {
   const context = useContext(CourseContext);
+  const courseForm = context?.courseForm;
   const showAddSectionForm = context?.showAddSectionForm;
   const setShowAddSectionForm = context?.setShowAddSectionForm;
-
-  const handleAddSectionFormBtn = () => {
+  const showAddLessonForm = context?.showAddLessonForm;
+  const videoCourseSections = context?.videoCourseSections;
+  const handleOpenAddSectionFormBtn = () => {
     if (setShowAddSectionForm) {
       setShowAddSectionForm(true);
     }
   };
 
+  const handleCloseAddSectionFormBtn = () => {
+    if (setShowAddSectionForm) {
+      setShowAddSectionForm(false);
+    }
+  };
+
   return (
     <div className={styles.videoContent}>
-      {showAddSectionForm && <AddSectionForm />}
+      {showAddSectionForm && (
+        <AddSectionForm
+          handleCloseAddSectionFormBtn={handleCloseAddSectionFormBtn}
+        />
+      )}
+      {showAddLessonForm && <AddLessonForm />}
       <div className={styles.videoContentHeader}>
         <h3>Course Structure</h3>
         <button
-          onClick={handleAddSectionFormBtn}
+          onClick={handleOpenAddSectionFormBtn}
           className={styles.addSectionBtn}
         >
           <svg
@@ -514,35 +749,338 @@ function VideoFormContent() {
       </div>
       <div className={styles.videoContentBody}>
         <form>
-          <Section />
-          <Section />
+          {courseForm?.courseSections?.map((item, index) => (
+            <Section
+              sectionNumber={index + 1}
+              sectionTitle={item.sectionTitle}
+              id={item.id}
+              lessons={item.lessons}
+              key={item.id}
+            />
+          ))}
         </form>
       </div>
     </div>
   );
 }
 
-function AddSectionForm() {
+function AddLessonForm() {
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [isUploading, setIsUploading] = useState(false);
+  const [lessonFormData, setLessonFormData] = useState<{
+    lessonTitle: string;
+    lessonDescription: string;
+    lessonVideo: File | null;
+  }>({ lessonTitle: "", lessonDescription: "", lessonVideo: null });
+  const [videoFileName, setVideoFileName] = useState<string | null>(null);
+
+  const context = useContext(CourseContext);
+  const courseForm = context?.courseForm;
+  const setCourseForm = context?.setCourseForm;
+  const setShowAddLessonForm = context?.setShowAddLessonForm;
+  const videoCourseSections = context?.videoCourseSections;
+  const setVideoCourseSections = context?.setVideoCourseSections;
+  const currentSection = context?.currentSection;
+  const { uploadCoursePdf, uploadCourseVideo } = useCourseStore();
+
+  const handleFormInput = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, type, files, value } = e.target as HTMLInputElement;
+    setLessonFormData((prev) => ({
+      ...prev,
+      [name]:
+        type === "file" ? (files && files.length > 0 ? files[0] : null) : value,
+    }));
+    files && setVideoFileName(files[0].name);
+    // console.log(e.target.name);
+  };
+
+  const handleCloseAddLessonForm = () => {
+    if (setShowAddLessonForm) {
+      setShowAddLessonForm(false);
+    }
+  };
+
+  const handleAddLesson: clickFuncType = async () => {
+    if (
+      setShowAddLessonForm &&
+      setVideoCourseSections &&
+      videoCourseSections &&
+      currentSection &&
+      lessonFormData &&
+      courseForm &&
+      setCourseForm
+    ) {
+      //set isLoading to true
+      setIsUploading(true);
+      //declare newLesson object variable
+      let res;
+
+      //first upload lesson file to cloudinary
+      if (lessonFormData?.lessonVideo?.type === "application/pdf") {
+        res = await uploadCoursePdf(
+          lessonFormData?.lessonVideo,
+          setUploadProgress
+        );
+      }
+      if (lessonFormData?.lessonVideo?.type.startsWith("video")) {
+        res = await uploadCourseVideo(
+          lessonFormData?.lessonVideo,
+          setUploadProgress
+        );
+      }
+
+      const section = courseForm.courseSections.find(
+        (item) => item.id === currentSection
+      );
+
+      const newLesson = {
+        id: section ? section.lessons.length + 1 : 1,
+        lessonTitle: lessonFormData.lessonTitle,
+        lessonDescription: lessonFormData.lessonDescription,
+        lessonVideo: lessonFormData.lessonVideo as File, // ensure not null
+        lessonFileUrl: {
+          url: res?.url ?? "",
+          public_id: res?.public_id ?? "",
+          fileType: res?.resource_type ?? "",
+        },
+      };
+
+      const newSections = courseForm.courseSections.map((item) =>
+        item.id === currentSection
+          ? { ...item, lessons: [...item.lessons, newLesson] }
+          : item
+      );
+      setCourseForm((prev) => ({
+        ...prev,
+        courseSections: newSections,
+      }));
+      setShowAddLessonForm(false);
+      // console.log(courseForm);
+    }
+  };
+
   return (
-    <div className={styles.addSectionForm}>
-      <div className={styles.addSectionFormHeader}>
+    <div className={styles.addLessonForm}>
+      <div className={styles.addLessonFormHeader}>
         <p>Add New Lesson</p>
+        <svg
+          onClick={handleCloseAddLessonForm}
+          xmlns="http://www.w3.org/2000/svg"
+          height="24px"
+          viewBox="0 -960 960 960"
+          width="24px"
+          fill="currentColor"
+        >
+          <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+        </svg>
       </div>
-      <div className={styles.addSectionFormBody}>
-        <label htmlFor="videoTitle">Video Title</label>
-        <input type="text" id="videoTitle" placeholder="Enter Video Title" />
-        <label htmlFor="videoDescription">Video Description</label>
-        <textarea
-          name="videoDescription"
-          id="videoDescription"
-          placeholder="Describe what this video covers..."
-        ></textarea>
+      <div className={styles.addLessonFormBody}>
+        <div className={styles.lessonTitle}>
+          <label htmlFor="lessonTitle">Lesson Title</label>
+          <input
+            onChange={handleFormInput}
+            value={lessonFormData.lessonTitle}
+            type="text"
+            name="lessonTitle"
+            id="lessonTitle"
+            placeholder="Enter lesson title..."
+          />
+        </div>
+        <div className={styles.lessonDescription}>
+          <label htmlFor="lessonDescription">Lesson Description</label>
+          <textarea
+            name="lessonDescription"
+            onChange={handleFormInput}
+            value={lessonFormData.lessonDescription}
+            id="lessonDescription"
+            placeholder="Short Description for this lesson..."
+          ></textarea>
+        </div>
+        <div className={styles.lessonUpload}>
+          <h3 className={styles.lessonUploadTitle}>Upload Lesson Video/PDF</h3>
+          <div className={styles.lessonUploadBody}>
+            <div className={styles.lessonUploadBodyTop}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="100px"
+                viewBox="0 -960 960 960"
+                width="100px"
+                fill="#d9d9d9"
+              >
+                <path d="M260-160q-91 0-155.5-63T40-377q0-78 47-139t123-78q25-92 100-149t170-57q117 0 198.5 81.5T760-520q69 8 114.5 59.5T920-340q0 75-52.5 127.5T740-160H520q-33 0-56.5-23.5T440-240v-206l-64 62-56-56 160-160 160 160-56 56-64-62v206h220q42 0 71-29t29-71q0-42-29-71t-71-29h-60v-80q0-83-58.5-141.5T480-720q-83 0-141.5 58.5T280-520h-20q-58 0-99 41t-41 99q0 58 41 99t99 41h100v80H260Zm220-280Z" />
+              </svg>
+            </div>
+            <div className={styles.lessonUploadBodyMiddle}>
+              <p>Drag and drop file here</p>
+              <span>or</span>
+            </div>
+            <div className={styles.lessonUploadBodyBottom}>
+              {!isUploading && (
+                <label htmlFor="lessonVideo">
+                  {videoFileName
+                    ? videoFileName.length > 20
+                      ? `${videoFileName.slice(0, 20)}...`
+                      : videoFileName
+                    : "Browse files"}
+                </label>
+              )}
+              {/* /* // Simple progress bar */}
+              {isUploading && (
+                <div
+                  style={{
+                    width: "100%",
+                    height: "20px",
+                    backgroundColor: "#e0e0e0",
+                    borderRadius: "10px",
+                    overflow: "hidden",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: `${uploadProgress}%`,
+                      height: "100%",
+                      backgroundColor: "#3B82F6",
+                      transition: "width 0.3s ease",
+                    }}
+                  />
+                </div>
+              )}
+              <input
+                onChange={handleFormInput}
+                type="file"
+                accept="video/*, application/pdf"
+                name="lessonVideo"
+                id="lessonVideo"
+              />
+              <p>Supported formats: MP4, MOV, AVI, WMV (Max Size: 2GB)</p>
+            </div>
+          </div>
+        </div>
+        <div className={styles.addLessonBtn}>
+          <button
+            disabled={!lessonFormData.lessonVideo || isUploading}
+            onClick={handleAddLesson}
+          >
+            {isUploading ? `Uploading: ${uploadProgress}` : "Add Lesson"}
+          </button>
+        </div>
       </div>
     </div>
   );
 }
 
-function Section() {
+function AddSectionForm({
+  handleCloseAddSectionFormBtn,
+}: {
+  handleCloseAddSectionFormBtn: () => void;
+}) {
+  const [sectionTitle, setSectionTitle] = useState<string>("");
+
+  const context = useContext(CourseContext);
+  const setVideoCourseSections = context?.setVideoCourseSections;
+  const setCourseForm = context?.setCourseForm;
+  const courseForm = context?.courseForm;
+  const setShowAddSectionForm = context?.setShowAddSectionForm;
+
+  const handleSectionTitleInput: EventChangeType = (e) => {
+    setSectionTitle(e.target.value);
+  };
+
+  const handleAddSection = () => {
+    if (setShowAddSectionForm && setCourseForm && sectionTitle) {
+      setCourseForm((prev) => ({
+        ...prev,
+        courseSections: [
+          ...prev.courseSections,
+          {
+            id: prev.courseSections.length + 1,
+            sectionTitle: sectionTitle,
+            lessons: [],
+          },
+        ],
+      }));
+      setShowAddSectionForm(false);
+    }
+  };
+  // console.log(courseForm);
+  return (
+    <div className={styles.addSectionForm}>
+      <div className={styles.addSectionFormHeader}>
+        <p>Add New Section</p>
+        <svg
+          onClick={handleCloseAddSectionFormBtn}
+          xmlns="http://www.w3.org/2000/svg"
+          height="24px"
+          viewBox="0 -960 960 960"
+          width="24px"
+          fill="currentColor"
+        >
+          <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+        </svg>
+      </div>
+      <div className={styles.addSectionFormBody}>
+        <label htmlFor="sectionTitle">Section Title</label>
+        <input
+          value={sectionTitle}
+          onChange={handleSectionTitleInput}
+          type="text"
+          id="sectionTitle"
+          placeholder="Enter Section Title"
+        />
+        <div className={styles.addSectionButton}>
+          <button onClick={handleAddSection}>Add Section</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Section({
+  sectionNumber,
+  sectionTitle,
+  lessons,
+  id,
+}: {
+  sectionNumber: number;
+  sectionTitle: string;
+  id: number;
+  lessons: {
+    id: number;
+    lessonTitle: string;
+    lessonVideo: File;
+    lessonDescription: string;
+  }[];
+}) {
+  const context = useContext(CourseContext);
+  const courseForm = context?.courseForm;
+  const setCourseForm = context?.setCourseForm;
+  const setShowAddLessonForm = context?.setShowAddLessonForm;
+  const setCurrentSection = context?.setCurrentSection;
+  const videoCourseSections = context?.videoCourseSections;
+  const setVideoCourseSections = context?.setVideoCourseSections;
+
+  const handleOpenAddLessonFormBtn = () => {
+    if (setShowAddLessonForm && setCurrentSection) {
+      setShowAddLessonForm(true);
+      setCurrentSection(id);
+    }
+  };
+
+  const handleDeleteCourseSection: (id: number) => void = (id: number) => {
+    if (courseForm && setCourseForm) {
+      const filtedSections = courseForm.courseSections.filter(
+        (section) => section.id !== id
+      );
+
+      setCourseForm((prev) => ({
+        ...prev,
+        courseSections: filtedSections,
+      }));
+    }
+  };
+
   return (
     <div className={styles.section}>
       <div className={styles.sectionTop}>
@@ -559,7 +1097,9 @@ function Section() {
               fill="#434343"
             />
           </svg>
-          <p>Section 1: Introduction</p>
+          <p>
+            Section {sectionNumber}: {sectionTitle}
+          </p>
         </div>
         <div className={styles.sectionTopRight}>
           <svg
@@ -576,6 +1116,7 @@ function Section() {
             />
           </svg>
           <svg
+            onClick={() => handleDeleteCourseSection(id)}
             className={styles.headerDeleteSvg}
             width="24"
             height="24"
@@ -604,10 +1145,17 @@ function Section() {
         </div>
       </div>
       <div className={styles.sectionMiddle}>
-        <Lesson />
-        <Lesson />
+        {lessons.map((item, index) => (
+          <Lesson id={item.id} key={item.id} lessonTitle={item.lessonTitle} />
+        ))}
+        {/* <Lesson />
+        <Lesson /> */}
       </div>
-      <div className={styles.sectionBottom}>
+      <div
+        role="button"
+        onClick={handleOpenAddLessonFormBtn}
+        className={styles.sectionBottom}
+      >
         <p>
           <svg
             width="24"
@@ -628,7 +1176,36 @@ function Section() {
   );
 }
 
-function Lesson() {
+function Lesson({ id, lessonTitle }: { id: number; lessonTitle: string }) {
+  const context = useContext(CourseContext);
+  const courseForm = context?.courseForm;
+  const setCourseForm = context?.setCourseForm;
+  const currentSection = context?.currentSection;
+  const videoCourseSections = context?.videoCourseSections;
+  const setVideoCourseSections = context?.setVideoCourseSections;
+
+  const handleDeleteCourseLesson: (id: number) => void = (id) => {
+    if (currentSection && courseForm && setCourseForm) {
+      const section = courseForm.courseSections.find(
+        (item) => item.id === currentSection
+      );
+
+      // Ensure filteredSectionLessons is always an array
+      const filteredSectionLessons =
+        section?.lessons.filter((item) => item.id !== id) ?? [];
+
+      const newSections = courseForm.courseSections.map((item) =>
+        item.id === currentSection
+          ? { ...item, lessons: filteredSectionLessons }
+          : item
+      );
+      setCourseForm((prev) => ({
+        ...prev,
+        courseSections: newSections,
+      }));
+    }
+  };
+
   return (
     <div className={styles.lesson}>
       <div className={styles.lessonLeft}>
@@ -656,7 +1233,7 @@ function Lesson() {
             fill="#1680D7"
           />
         </svg>
-        <p>Welcome to the Course</p>
+        <p>{lessonTitle}</p>
       </div>
       <div className={styles.lessonRight}>
         <p>5:30</p>
@@ -673,6 +1250,7 @@ function Lesson() {
           />
         </svg>
         <svg
+          onClick={() => handleDeleteCourseLesson(id)}
           width="20"
           height="20"
           viewBox="0 0 24 24"
@@ -701,52 +1279,86 @@ function ReuseInputComp({
   btnType: string;
 }) {
   const courseContext = useContext(CourseContext);
-  const objectives = courseContext?.objectives;
-  const setObjectives = courseContext?.setObjectives;
-  const prerequisites = courseContext?.prerequisites;
-  const setPrerequisites = courseContext?.setPrerequisites;
+  const objectives = courseContext?.courseForm.objectives;
+  const setCourseForm = courseContext?.setCourseForm;
+  const prerequisites = courseContext?.courseForm.prerequisites;
 
   // console.log(objectives);
 
   const handleObjectiveInput: EventChangeType = (e, id) => {
-    if (setObjectives && typeof id === "number") {
+    if (setCourseForm && typeof id === "number") {
       let updatedObjectives = (objectives ?? []).map((item) =>
         item.id === id ? { ...item, value: e.target.value } : item
       );
 
-      setObjectives(updatedObjectives);
+      setCourseForm((prev) => ({ ...prev, objectives: updatedObjectives }));
       // console.log(typeof id);
+    }
+  };
+
+  const handleDeleteObjective: (id: number) => void = (id) => {
+    if (setCourseForm) {
+      let updatedObjectives = (objectives ?? []).filter(
+        (item) => item.id !== id
+      );
+
+      setCourseForm((prev) => ({
+        ...prev,
+        objectives: updatedObjectives,
+      }));
     }
   };
   // console.log(objectives);
 
   const handlePrerequisiteInput: EventChangeType = (e, id) => {
-    if (setPrerequisites && typeof id === "number") {
+    if (setCourseForm && typeof id === "number") {
       let updatedPrerequisites = (prerequisites ?? []).map((item) =>
         item.id === id ? { ...item, value: e.target.value } : item
       );
 
-      setPrerequisites(updatedPrerequisites);
+      setCourseForm((prev) => ({
+        ...prev,
+        prerequisites: updatedPrerequisites,
+      }));
       // console.log(typeof id);
+    }
+  };
+
+  const handleDeletePrerequisite: (id: number) => void = (id) => {
+    if (setCourseForm) {
+      let updatedPrerequisites = (prerequisites ?? []).filter(
+        (item) => item.id !== id
+      );
+
+      setCourseForm((prev) => ({
+        ...prev,
+        prerequisites: updatedPrerequisites,
+      }));
     }
   };
   // console.log(prerequisites);
 
   const handleAddObjective: clickFuncType = () => {
-    if (setObjectives) {
-      setObjectives((currentObjectives) => [
-        ...currentObjectives,
-        { id: currentObjectives.length + 1, value: "" },
-      ]);
+    if (setCourseForm) {
+      setCourseForm((prev) => ({
+        ...prev,
+        objectives: [
+          ...prev.objectives,
+          { id: prev.objectives.length + 1, value: "" },
+        ],
+      }));
     }
   };
 
   const handleAddPrerequisite: clickFuncType = () => {
-    if (setPrerequisites) {
-      setPrerequisites((currentPrerequisites) => [
-        ...currentPrerequisites,
-        { id: currentPrerequisites.length + 1, value: "" },
-      ]);
+    if (setCourseForm) {
+      setCourseForm((prev) => ({
+        ...prev,
+        prerequisites: [
+          ...prev.prerequisites,
+          { id: prev.prerequisites.length + 1, value: "" },
+        ],
+      }));
     }
   };
 
@@ -770,6 +1382,7 @@ function ReuseInputComp({
               viewBox="0 -960 960 960"
               width="24px"
               fill="#e3e3e3"
+              onClick={() => handleDeleteObjective(item.id)}
             >
               <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
             </svg>
@@ -792,6 +1405,7 @@ function ReuseInputComp({
               viewBox="0 -960 960 960"
               width="24px"
               fill="#e3e3e3"
+              onClick={() => handleDeletePrerequisite(item.id)}
             >
               <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
             </svg>

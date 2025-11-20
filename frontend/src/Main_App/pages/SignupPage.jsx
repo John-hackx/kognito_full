@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import styles from "./SignupPage.module.css";
 import googleIcon from "../../assets/images/google.png";
 import facebookIcon from "../../assets/images/facebook.png";
@@ -9,6 +9,8 @@ import useAuthStore from "../../stores/authStore";
 import Loader from "../components/Loader";
 
 function SignupPage() {
+  const [role, setRole] = useState(null);
+  const location = useLocation();
   //state to handle input fields
   const [formData, setFormData] = useState({
     firstName: "",
@@ -30,18 +32,29 @@ function SignupPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const user = await signUp(formData);
+      const newFormData = { ...formData, role: role || "student" };
+      console.log(newFormData);
+
+      const user = await signUp(newFormData);
+      console.log(user);
+
       if (user) {
-        navigate("/app");
+        navigate(`/auth/verify/${user._id}`);
       }
     } catch (error) {
-      console.log(error.message);
+      console.log(error?.message);
     }
   };
 
   useEffect(() => {
     setError(null);
   }, [setError]);
+
+  useEffect(() => {
+    const role = location.state?.role;
+    setRole(role);
+  });
+  console.log(role);
 
   return (
     <>

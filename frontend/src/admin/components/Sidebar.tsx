@@ -124,9 +124,7 @@ const categories: Categories[] = [
 
 export default function Sidebar() {
   const context = useContext(CourseContext);
-  const showAddSectionForm = context?.showAddSectionForm;
-
-  console.log(showAddSectionForm);
+  // const showAddSectionForm = context?.showAddSectionForm;
 
   return (
     <div className={clsx(styles.sidebar)}>

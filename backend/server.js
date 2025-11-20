@@ -1,29 +1,35 @@
-import dotenv from "dotenv";
 import express from "express";
-import authRoutes from "./routes/authRoutes.routes.js";
-import connectDB from "./config/db.js";
+import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import helmet from "helmet";
 import cors from "cors";
+import authRouter from "./routes/auth.route.js";
+import courseRouter from "./routes/course.route.js";
+import connectDB from "./config/db.js";
 
 dotenv.config();
+const PORT = process.env.PORT || 3000;
 const app = express();
-const PORT = process.env.PORT || 5000;
 
+//middlewares
+app.use(helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } }));
+app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
+    origin: process.env.CLIENT_URL || "http://localhost:5173",
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
-//middlewares
-app.use(cookieParser());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-app.use("/api/auth", authRoutes);
+//routes
+app.use("/api/auth", authRouter);
+app.use("/api/courses", courseRouter);
 
 app.listen(PORT, () => {
+  console.log(`server started on port ${PORT}`);
   connectDB();
-  console.log(`server started on port ${PORT}...`);
 });

@@ -7,6 +7,7 @@ import { WindowSizeContext } from "./WindowSizeContext";
 
 function LandingPageHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSignUpDropDownOpen, setIsSignUpDropDownOpen] = useState(false);
   const { windowWidth } = useContext(WindowSizeContext);
   const navigate = useNavigate();
   const mobileView = windowWidth <= 500;
@@ -18,6 +19,9 @@ function LandingPageHeader() {
   const handleCloseMenu = () => {
     setIsMenuOpen(false);
   };
+
+  const navigateToSignUpPage = (role) =>
+    navigate("auth", { state: { isLogin: false, role: role } });
 
   return (
     <nav className={styles.navbar}>
@@ -130,26 +134,33 @@ function LandingPageHeader() {
             Log in
           </button>
           <button
-            onClick={() => navigate("auth", { state: { isLogin: false } })}
+            onClick={() => setIsSignUpDropDownOpen((prev) => !prev)}
             className={clsx(styles.navbarSignUpBtn)}
           >
             Get Started{" "}
             <span>
               <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
                 xmlns="http://www.w3.org/2000/svg"
+                height="24px"
+                viewBox="0 -960 960 960"
+                width="24px"
+                fill="#000000"
               >
-                <path
-                  d="M16.175 13H4V11H16.175L10.575 5.4L12 4L20 12L12 20L10.575 18.6L16.175 13Z"
-                  fill="#27696e"
-                />
+                <path d="M480-360 280-560h400L480-360Z" />
               </svg>
             </span>
           </button>
         </div>
+        {isSignUpDropDownOpen && (
+          <div className={clsx(styles.signUpDropDown)}>
+            <button onClick={() => navigateToSignUpPage("student")}>
+              Student
+            </button>
+            <button onClick={() => navigateToSignUpPage("instructor")}>
+              Instructor
+            </button>
+          </div>
+        )}
       </div>
     </nav>
   );

@@ -10,6 +10,7 @@
   left: 0;
   right: 0;
   z-index: 9999;
+  position: absolute;
 }
 
 .navbarLeft {
@@ -117,13 +118,41 @@
 }
 .navbarSignUpBtn span {
   margin-left: 4px;
-  margin-top: 4px;
+  /* margin-top: 4px; */
 }
 .navbarSignUpBtn:hover {
   color: #ffffff;
   background-color: #27696e;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
+}
+
+.signUpDropDown {
+  position: relative;
+  z-index: 9999;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  margin-top: 10px;
+  /* padding: 10px; */
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  width: 12vw;
+  height: auto;
+  right: -14.7vw;
+  top: -3vh;
+}
+.signUpDropDown button {
+  width: 100%;
+  padding: 5px;
+}
+.signUpDropDown button:hover {
+  cursor: pointer;
+  background-color: #d9d9d9;
+  /* color: #ffffff; */
+  transition: all 0.3s ease-in-out;
 }
 
 /* responsive design */

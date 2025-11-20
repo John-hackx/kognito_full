@@ -45,6 +45,8 @@ a {
   /* border: 1px solid green; */
   display: flex;
   flex-direction: column;
+  height: auto;
+  max-height: auto;
 }
 
 .welcomeHero {
@@ -105,11 +107,12 @@ a {
 
 .upcomingClasses {
   /* border: 1px solid red; */
-  height: 210px;
+  height: auto;
   padding: 20px;
   display: flex;
   flex-direction: column;
-  margin-top: 5px;
+  margin-top: 20vh !important;
+  gap: 20px;
 }
 .upcomingClassesHeader {
   /* border: 1px solid green; */
@@ -121,6 +124,7 @@ a {
 
 .upcomingClassesBody {
   flex: 0.8;
+  height: auto;
   /* border: 1px solid brown; */
   display: flex;
   gap: 20px;
@@ -131,6 +135,7 @@ a {
   /* width: 255px; */
   flex-grow: 1;
   border-radius: 13px;
+  height: 30vh;
 }
 .upcomingClassesSubCard {
   border-radius: 13px;
@@ -205,9 +210,9 @@ a {
 }
 
 .bottomSection {
-  /* border: 1px solid red; */
-  height: 530px;
-  margin-top: 40px !important;
+  /* border: 1px solid green; */
+  height: 100vh;
+  margin-top: 7vh !important;
   width: 96%;
   margin: 0 auto;
   display: flex;

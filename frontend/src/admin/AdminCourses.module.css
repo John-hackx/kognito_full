@@ -5,6 +5,10 @@
   border: 0;
 }
 
+svg:hover {
+  cursor: pointer;
+}
+
 .adminCourses {
   background-color: #efefef;
   height: auto;
@@ -105,7 +109,7 @@
 }
 .course {
   /* width: 240px; */
-  height: 310px;
+  height: auto;
   border: 1px solid #d9d9d9;
   border-radius: 8px;
   display: flex;
@@ -135,7 +139,7 @@
   display: flex;
   flex-direction: column;
   padding-top: 5px;
-  padding-bottom: 5px;
+  padding-bottom: 10px;
   padding-left: 10px;
   padding-right: 10px;
   gap: 5px;
@@ -153,6 +157,9 @@
   font-size: 13px;
 }
 .rating {
+  display: flex;
+}
+.rating span {
   display: flex;
 }
 .rating p {
@@ -763,4 +770,433 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 1;
+  height: 200vh;
+}
+
+/* add section form */
+
+.addSectionForm {
+  position: fixed;
+  top: 20%;
+  right: 20%;
+  background-color: #ffffff;
+  border: 1px solid #d9d9d9;
+  border-radius: 10px;
+  height: auto;
+  width: 60vw;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+}
+.addSectionFormHeader {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: #d9d9d9;
+  padding: 10px;
+  display: flex;
+  /* justify-content: center; */
+}
+.addSectionFormHeader p {
+  color: rgba(0, 0, 0, 0.7);
+  flex: 0.9;
+}
+.addSectionFormHeader svg {
+  flex: 0.1;
+  color: #3a3a3a;
+}
+.addSectionFormHeader svg:hover {
+  cursor: pointer;
+}
+.addSectionFormBody {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.addSectionFormBody label {
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.8);
+}
+.addSectionFormBody input {
+  border: 1px solid #d9d9d9;
+  outline: none;
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 15px;
+  border-radius: 10px;
+}
+.addSectionButton {
+  display: flex;
+  justify-content: center;
+}
+.addSectionButton button {
+  border-radius: 8px;
+  margin-top: 15px;
+  height: auto;
+  padding: 10px;
+  background-color: #0965b1;
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff;
+}
+.addSectionButton button:hover {
+  cursor: pointer;
+  background-color: #010ef7;
+}
+
+.addLessonForm {
+  position: fixed;
+  top: 10%;
+  right: 20%;
+  background-color: #ffffff;
+  border: 1px solid #d9d9d9;
+  border-radius: 10px;
+  height: 80vh;
+  width: 60vw;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+}
+.addLessonFormHeader {
+  display: flex;
+  position: fixed;
+  width: 59.9vw;
+  background-color: #d9d9d9;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  padding: 10px;
+}
+.addLessonFormHeader p {
+  flex: 0.9;
+  color: rgba(0, 0, 0, 0.7);
+}
+.addLessonFormHeader svg {
+  flex: 0.1;
+}
+.addLessonFormHeader svg:hover {
+  cursor: pointer;
+}
+.addLessonFormBody {
+  overflow-y: scroll;
+  margin-top: 10vh;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+.lessonTitle {
+  display: flex;
+  flex-direction: column;
+}
+.lessonTitle label {
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.8);
+}
+.lessonTitle input {
+  outline: none;
+  border: 1px solid #d9d9d9;
+  padding: 10px;
+  font-size: 15px;
+  margin-top: 10px;
+  border-radius: 8px;
+}
+.lessonDescription {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.lessonDescription label {
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.8);
+}
+.lessonDescription textarea {
+  border: 1px solid #d9d9d9;
+  font-size: 15px;
+  padding: 10px;
+  height: 20vh;
+  margin-top: 10px;
+  border-radius: 8px;
+  outline: none;
+}
+.lessonUpload {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  border: 1px solid #d9d9d9;
+  border-radius: 10px;
+  padding: 10px;
+}
+.lessonUploadTitle {
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.8);
+}
+.lessonUploadBody {
+  margin-top: 20px;
+  border: 1px dashed #d9d9d9;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+/* .lessonUploadBodyTop {
+} */
+.lessonUploadBodyMiddle {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+}
+.lessonUploadBodyMiddle p {
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.8);
+}
+.lessonUploadBodyMiddle span {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.7);
+}
+.lessonUploadBodyBottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+.lessonUploadBodyBottom label {
+  padding: 10px;
+  background-color: #0965b1;
+  color: #ffffff;
+  font-size: 16px;
+  border-radius: 8px;
+}
+.lessonUploadBoyBottomd label:hover {
+  cursor: pointer;
+  background-color: #010ef7;
+}
+.lessonUploadBodyBottom input {
+  display: none;
+}
+.lessonUploadBodyBottom p {
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.6);
+}
+.addLessonBtn {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+.addLessonBtn button {
+  padding: 10px;
+  background-color: #14a24f;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 8px;
+}
+.addLessonBtn button:hover {
+  cursor: pointer;
+  background-color: #0e8c3a;
+}
+
+/*--------------------Course Settings---------------------------------*/
+.courseSettings {
+  height: 90vh;
+  width: 100%;
+  /* border: 1px solid red; */
+  display: flex;
+  padding: 10px 20px;
+  overflow: hidden;
+  gap: 20px;
+}
+.courseSettingsLeft {
+  flex: 0.5;
+}
+.seoFormTitle {
+  color: rgba(0, 0, 0);
+  margin-top: 10px;
+}
+.seoFormBody {
+  /* border: 1px solid red; */
+  margin-top: 20px;
+}
+.seoFormBody form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  /* border: 1px solid blue; */
+  padding: 0;
+}
+.metaTitleInput {
+  /* border: 1px solid green; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.metaTitleInput label {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.7);
+  margin-bottom: 10px;
+}
+.metaTitleInput input {
+  outline: none;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.8);
+}
+.metaDescriptionInput {
+  /* border: 1px solid green; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.metaDescriptionInput label {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.7);
+  margin-bottom: 10px;
+}
+.metaDescriptionInput textarea {
+  outline: none;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.8);
+  height: 20vh;
+}
+
+.visibilityTitle {
+  margin-top: 10vh;
+}
+.visibilityTitle h3 {
+  color: rgba(0, 0, 0);
+}
+.visibilityTitle p {
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 14px;
+  margin-top: 10px;
+}
+.visibilityInput {
+  margin-top: 10px;
+}
+.visibilityInput select {
+  outline: none;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  background-color: #ffffff;
+  width: 50%;
+  padding: 10px;
+  /* padding-right: 10px; */
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+/*Instructor information*/
+.courseSettingsRight {
+  flex: 0.5;
+  /* border: 1px solid blue; */
+}
+.instructorInformationTitle {
+  margin-top: 10px;
+}
+.instructorInformationTitle h3 {
+  color: rgba(0, 0, 0);
+}
+.instructorInformationBody {
+  margin-top: 20px;
+  border: 1px solid #f3f4f6;
+  padding: 10px;
+  border-radius: 5px;
+  height: 70vh;
+}
+.instructorProfile {
+  display: flex;
+  height: 12vh;
+  gap: 20px;
+  /* border: 1px solid green; */
+}
+.instructorProfileLeft {
+  flex: 0.16;
+  border-radius: 50%;
+  /* border: 1px solid red; */
+}
+.instructorProfileLeft img {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.instructorProfileRight {
+  flex: 0.7;
+  /* border: 1px solid blue; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+}
+.instructorProfileRight h2 {
+  font-size: 18px;
+  color: rgba(0, 0, 0, 0.8);
+}
+.instructorProfileRight p {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.instructorForm {
+  /* border: 1px solid red; */
+  width: 100%;
+  padding: 0;
+  margin-top: 20px;
+}
+.instructorForm form {
+  /* border: 1px solid blue; */
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.displayNameInput {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.displayNameInput label {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.7);
+  margin-bottom: 10px;
+}
+.displayNameInput input {
+  outline: none;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.bioForCourseInput {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 20px;
+}
+.bioForCourseInput label {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.7);
+  margin-bottom: 10px;
+}
+.bioForCourseInput textarea {
+  outline: none;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.8);
+  height: 20vh;
 }
